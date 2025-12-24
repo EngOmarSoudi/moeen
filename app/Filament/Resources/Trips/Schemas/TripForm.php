@@ -68,29 +68,7 @@ class TripForm
                             ->native(false)
                             ->columnSpan(1),
 
-                        Select::make('customer_segment')
-                            ->label('Customer Segment')
-                            ->options([
-                                'new' => 'New Customer',
-                                'returning' => 'Returning Customer',
-                                'vip' => 'VIP Customer',
-                            ])
-                            ->required()
-                            ->default('new')
-                            ->native(false)
-                            ->columnSpan(1),
 
-                        Select::make('trip_leg')
-                            ->label('Trip Direction')
-                            ->options([
-                                'outbound' => 'Outbound',
-                                'return' => 'Return',
-                                'round_trip' => 'Round Trip',
-                            ])
-                            ->required()
-                            ->default('outbound')
-                            ->native(false)
-                            ->columnSpan(1),
                     ]),
 
                 // Quick Summary Card
@@ -126,9 +104,9 @@ class TripForm
 
                 // Customer & Assignment
                 Section::make('Customer & Assignment')
-                    ->description('Assign customer and resources to this trip')
+                    ->description('Assign customer and vehicle type to this trip')
                     ->icon('heroicon-o-users')
-                    ->columns(3)
+                    ->columns(2)
                     ->columnSpan(3)
                     ->schema([
                         Select::make('customer_id')
@@ -137,27 +115,65 @@ class TripForm
                             ->searchable(['name', 'phone'])
                             ->preload()
                             ->required()
+                            ->helperText('Search by customer name or phone number, or click "+" to create new customer')
                             ->createOptionForm([
-                                TextInput::make('name')->required(),
-                                TextInput::make('phone')->tel()->required(),
-                                TextInput::make('email')->email(),
+                                TextInput::make('name')
+                                    ->label('Full Name')
+                                    ->required()
+                                    ->maxLength(255),
+                                TextInput::make('phone')
+                                    ->label('Phone Number')
+                                    ->tel()
+                                    ->required()
+                                    ->maxLength(20),
+                                TextInput::make('email')
+                                    ->label('Email Address')
+                                    ->email()
+                                    ->maxLength(255),
+                                TextInput::make('nationality')
+                                    ->label('Nationality')
+                                    ->maxLength(100),
+                                Select::make('document_type')
+                                    ->label('Document Type')
+                                    ->options([
+                                        'national_id' => 'National ID',
+                                        'passport' => 'Passport',
+                                        'residence_permit' => 'Residence Permit',
+                                        'driver_license' => 'Driver License',
+                                        'other' => 'Other',
+                                    ])
+                                    ->native(false),
+                                TextInput::make('document_no')
+                                    ->label('Document Number')
+                                    ->maxLength(100),
+                                TextInput::make('issuing_authority')
+                                    ->label('Issuing Authority')
+                                    ->maxLength(255),
+                                Select::make('status_id')
+                                    ->label('Customer Status')
+                                    ->relationship('status', 'name')
+                                    ->searchable()
+                                    ->preload()
+                                    ->required(),
+                                Select::make('agent_id')
+                                    ->label('Assigned Agent')
+                                    ->relationship('agent', 'name')
+                                    ->searchable()
+                                    ->preload(),
+                                Textarea::make('notes')
+                                    ->label('General Notes')
+                                    ->rows(2),
+                                Textarea::make('special_case_note')
+                                    ->label('Special Case Notes')
+                                    ->rows(2),
+                                TextInput::make('emergency_contact_name')
+                                    ->label('Emergency Contact Name')
+                                    ->maxLength(255),
+                                TextInput::make('emergency_contact_phone')
+                                    ->label('Emergency Contact Phone')
+                                    ->tel()
+                                    ->maxLength(20),
                             ])
-                            ->columnSpan(1),
-
-                        Select::make('driver_id')
-                            ->label('Driver')
-                            ->relationship('driver', 'name')
-                            ->searchable(['name', 'phone'])
-                            ->preload()
-                            ->helperText('Leave empty to assign later')
-                            ->columnSpan(1),
-
-                        Select::make('vehicle_id')
-                            ->label('Vehicle')
-                            ->relationship('vehicle', 'plate_number')
-                            ->searchable(['plate_number'])
-                            ->preload()
-                            ->helperText('Leave empty to assign later')
                             ->columnSpan(1),
 
                         Select::make('agent_id')
@@ -167,7 +183,15 @@ class TripForm
                             ->preload()
                             ->helperText('Optional: Agent who booked this trip')
                             ->columnSpan(1),
-
+                    
+                        Select::make('vehicle_type_id')
+                            ->label('Vehicle Type')
+                            ->relationship('vehicleType', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->helperText('Select the required vehicle type for this trip')
+                            ->columnSpan(1),
+                    
                         Select::make('travel_route_id')
                             ->label('Predefined Route')
                             ->relationship('travelRoute', 'name')

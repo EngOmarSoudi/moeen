@@ -17,6 +17,7 @@ class Trip extends Model
         'customer_id',
         'driver_id',
         'vehicle_id',
+        'vehicle_type_id',
         'trip_type_id',
         'travel_route_id',
         'agent_id',
@@ -74,6 +75,11 @@ class Trip extends Model
     public function vehicle(): BelongsTo
     {
         return $this->belongsTo(Vehicle::class);
+    }
+
+    public function vehicleType(): BelongsTo
+    {
+        return $this->belongsTo(VehicleType::class);
     }
 
     public function tripType(): BelongsTo

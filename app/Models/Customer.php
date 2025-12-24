@@ -24,6 +24,8 @@ class Customer extends Model
         'agent_id',
         'notes',
         'special_case_note',
+        'emergency_contact_name',
+        'emergency_contact_phone',
     ];
 
     public function status(): BelongsTo

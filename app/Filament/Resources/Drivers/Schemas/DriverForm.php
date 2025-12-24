@@ -7,6 +7,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Schema;
@@ -115,6 +116,19 @@ class DriverForm
                             ]),
                     ])
                     ->columns(2),
+
+                Section::make('Assigned Vehicles')
+                    ->description('Select vehicles assigned to this driver')
+                    ->icon('heroicon-o-truck')
+                    ->schema([
+                        CheckboxList::make('vehicles')
+                            ->label('Vehicles')
+                            ->relationship('vehicles', 'plate_number')
+                            ->searchable()
+                            ->columns(1)
+                            ->helperText('Check vehicles that this driver is authorized to use')
+                            ->columnSpanFull(),
+                    ]),
 
                 Section::make('Additional Notes')
                     ->schema([
