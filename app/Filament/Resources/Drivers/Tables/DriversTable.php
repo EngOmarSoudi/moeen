@@ -7,8 +7,12 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Filters\TrashedFilter;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class DriversTable
@@ -17,50 +21,84 @@ class DriversTable
     {
         return $table
             ->columns([
+                ImageColumn::make('photo')
+                    ->label('Photo')
+                    ->circular()
+                    ->defaultImageUrl(url('/images/default-avatar.png')),
                 TextColumn::make('name')
-                    ->searchable(),
+                    ->label('Name')
+                    ->searchable()
+                    ->sortable()
+                    ->weight('bold'),
                 TextColumn::make('phone')
-                    ->searchable(),
+                    ->label('Phone')
+                    ->searchable()
+                    ->copyable(),
                 TextColumn::make('email')
-                    ->label('Email address')
-                    ->searchable(),
+                    ->label('Email')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                BadgeColumn::make('status')
+                    ->label('Status')
+                    ->colors([
+                        'success' => 'available',
+                        'warning' => 'busy',
+                        'danger' => 'offline',
+                        'secondary' => 'on_break',
+                    ])
+                    ->icons([
+                        'heroicon-o-check-circle' => 'available',
+                        'heroicon-o-clock' => 'busy',
+                        'heroicon-o-x-circle' => 'offline',
+                        'heroicon-o-pause-circle' => 'on_break',
+                    ]),
                 TextColumn::make('license_number')
-                    ->searchable(),
+                    ->label('License No.')
+                    ->searchable()
+                    ->toggleable(),
                 TextColumn::make('license_expiry')
-                    ->date()
-                    ->sortable(),
-                TextColumn::make('id_number')
-                    ->searchable(),
-                TextColumn::make('status')
-                    ->searchable(),
-                TextColumn::make('user.name')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('photo')
-                    ->searchable(),
+                    ->label('License Expiry')
+                    ->date('M d, Y')
+                    ->sortable()
+                    ->toggleable()
+                    ->color(fn ($record) => 
+                        $record->license_expiry && $record->license_expiry->isPast() ? 'danger' : null
+                    ),
                 TextColumn::make('rating')
-                    ->numeric()
-                    ->sortable(),
+                    ->label('Rating')
+                    ->numeric(1)
+                    ->suffix(' ★')
+                    ->sortable()
+                    ->alignCenter()
+                    ->color('warning'),
                 TextColumn::make('total_trips')
+                    ->label('Total Trips')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->alignCenter(),
+                TextColumn::make('user.name')
+                    ->label('User Account')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('deleted_at')
-                    ->dateTime()
+                    ->label('Created')
+                    ->dateTime('M d, Y')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
+                SelectFilter::make('status')
+                    ->options([
+                        'available' => 'Available',
+                        'busy' => 'Busy',
+                        'offline' => 'Offline',
+                        'on_break' => 'On Break',
+                    ])
+                    ->multiple(),
                 TrashedFilter::make(),
             ])
             ->recordActions([
+                ViewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([
@@ -69,6 +107,7 @@ class DriversTable
                     ForceDeleteBulkAction::make(),
                     RestoreBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->defaultSort('created_at', 'desc');
     }
 }

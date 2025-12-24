@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Filament\Navigation\NavigationItem;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -24,9 +25,28 @@ class TripResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Operations';
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = -100;
 
     protected static ?string $recordTitleAttribute = 'code';
+
+    public static function getNavigationItems(): array
+    {
+        return [
+            NavigationItem::make(static::getNavigationLabel())
+                ->group(static::getNavigationGroup())
+                ->icon(static::getNavigationIcon())
+                ->activeIcon(static::getNavigationIcon())
+                ->isActiveWhen(fn () => request()->routeIs(static::getRouteBaseName() . '.*'))
+                ->sort(static::getNavigationSort())
+                ->url(static::getNavigationUrl()),
+            
+            NavigationItem::make('Create Trip')
+                ->group(static::getNavigationGroup())
+                ->icon('heroicon-o-plus-circle')
+                ->sort(static::getNavigationSort() + 1)
+                ->url(static::getUrl('create')),
+        ];
+    }
 
     public static function form(Schema $schema): Schema
     {

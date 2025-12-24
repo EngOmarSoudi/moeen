@@ -7,8 +7,11 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Filters\TrashedFilter;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class TripsTable
@@ -18,77 +21,111 @@ class TripsTable
         return $table
             ->columns([
                 TextColumn::make('code')
-                    ->searchable(),
+                    ->label('Trip Code')
+                    ->searchable()
+                    ->sortable()
+                    ->copyable()
+                    ->weight('bold'),
+                BadgeColumn::make('status')
+                    ->label('Status')
+                    ->colors([
+                        'warning' => 'scheduled',
+                        'primary' => 'in_progress',
+                        'success' => 'completed',
+                        'danger' => 'cancelled',
+                    ])
+                    ->icons([
+                        'heroicon-o-clock' => 'scheduled',
+                        'heroicon-o-arrow-path' => 'in_progress',
+                        'heroicon-o-check-circle' => 'completed',
+                        'heroicon-o-x-circle' => 'cancelled',
+                    ]),
                 TextColumn::make('customer.name')
-                    ->numeric()
+                    ->label('Customer')
+                    ->searchable()
                     ->sortable(),
                 TextColumn::make('driver.name')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('vehicle.id')
-                    ->numeric()
-                    ->sortable(),
+                    ->label('Driver')
+                    ->searchable()
+                    ->sortable()
+                    ->placeholder('Not Assigned'),
+                TextColumn::make('vehicle.plate_number')
+                    ->label('Vehicle')
+                    ->sortable()
+                    ->placeholder('Not Assigned'),
                 TextColumn::make('tripType.name')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('travelRoute.name')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('agent.name')
-                    ->numeric()
-                    ->sortable(),
+                    ->label('Type')
+                    ->sortable()
+                    ->badge(),
                 TextColumn::make('origin')
-                    ->searchable(),
+                    ->label('Origin')
+                    ->searchable()
+                    ->limit(20),
                 TextColumn::make('destination')
-                    ->searchable(),
+                    ->label('Destination')
+                    ->searchable()
+                    ->limit(20),
                 TextColumn::make('start_at')
-                    ->dateTime()
+                    ->label('Start Date')
+                    ->dateTime('M d, Y H:i')
                     ->sortable(),
-                TextColumn::make('completed_at')
-                    ->dateTime()
-                    ->sortable(),
-                TextColumn::make('status')
-                    ->searchable(),
-                TextColumn::make('service_kind')
-                    ->searchable(),
-                TextColumn::make('customer_segment')
-                    ->searchable(),
-                TextColumn::make('trip_leg')
-                    ->searchable(),
                 TextColumn::make('passenger_count')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('amount')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('discount')
-                    ->numeric()
+                    ->label('Passengers')
+                    ->alignCenter()
                     ->sortable(),
                 TextColumn::make('final_amount')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('hotel_name')
-                    ->searchable(),
-                TextColumn::make('created_by')
-                    ->numeric()
-                    ->sortable(),
+                    ->label('Amount')
+                    ->money('SAR')
+                    ->sortable()
+                    ->alignEnd(),
+                BadgeColumn::make('service_kind')
+                    ->label('Service')
+                    ->colors([
+                        'primary' => 'trip',
+                        'warning' => 'hotel_booking',
+                        'success' => 'package',
+                    ])
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('agent.name')
+                    ->label('Agent')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('deleted_at')
+                    ->label('Created')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
+                SelectFilter::make('status')
+                    ->options([
+                        'scheduled' => 'Scheduled',
+                        'in_progress' => 'In Progress',
+                        'completed' => 'Completed',
+                        'cancelled' => 'Cancelled',
+                    ])
+                    ->multiple(),
+                SelectFilter::make('service_kind')
+                    ->label('Service Type')
+                    ->options([
+                        'trip' => 'Trip',
+                        'hotel_booking' => 'Hotel Booking',
+                        'package' => 'Package',
+                    ]),
+                SelectFilter::make('trip_type_id')
+                    ->label('Trip Type')
+                    ->relationship('tripType', 'name')
+                    ->searchable()
+                    ->preload(),
+                SelectFilter::make('driver_id')
+                    ->label('Driver')
+                    ->relationship('driver', 'name')
+                    ->searchable()
+                    ->preload(),
                 TrashedFilter::make(),
             ])
             ->recordActions([
+                ViewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([
@@ -97,6 +134,7 @@ class TripsTable
                     ForceDeleteBulkAction::make(),
                     RestoreBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->defaultSort('start_at', 'desc');
     }
 }

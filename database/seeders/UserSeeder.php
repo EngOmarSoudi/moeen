@@ -6,25 +6,37 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 
 class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        // effective permissions will be handled by policies mostly or we can seed them
-        // For now, let's create a Super Admin role
-        $role = Role::firstOrCreate(['name' => 'super_admin']);
+        // Create roles if they don't exist
+        $superAdminRole = Role::firstOrCreate(['name' => 'super_admin']);
+        $managerRole = Role::firstOrCreate(['name' => 'manager']);
 
-        $user = User::firstOrCreate(
+        // Create admin user and assign super_admin role
+        $adminUser = User::firstOrCreate(
             ['email' => 'admin@moean.com'],
             [
-                'name' => 'Super Admin',
-                'password' => Hash::make('password'),
+                'name' => 'Admin User',
                 'email_verified_at' => now(),
+                'password' => Hash::make('password'),
             ]
         );
-        
-        $user->assignRole($role);
+        $adminUser->assignRole('super_admin');
+
+        // Create manager user and assign manager role
+        $managerUser = User::firstOrCreate(
+            ['email' => 'manager@moean.com'],
+            [
+                'name' => 'Manager User',
+                'email_verified_at' => now(),
+                'password' => Hash::make('password'),
+            ]
+        );
+        $managerUser->assignRole('manager');
+
+        User::factory(8)->create();
     }
 }
