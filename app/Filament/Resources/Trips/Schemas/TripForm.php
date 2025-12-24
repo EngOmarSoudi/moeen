@@ -116,6 +116,26 @@ class TripForm
                             ->preload()
                             ->required()
                             ->helperText('Search by customer name or phone number, or click "+" to create new customer')
+                            ->reactive()
+                            ->afterStateUpdated(function (callable $set, $state) {
+                                if ($state) {
+                                    $customer = \App\Models\Customer::find($state);
+                                    if ($customer) {
+                                        $set('customer_phone', $customer->phone);
+                                        $set('customer_email', $customer->email);
+                                        $set('customer_nationality', $customer->nationality);
+                                        $set('customer_document_type', $customer->document_type);
+                                        $set('customer_document_no', $customer->document_no);
+                                        $set('customer_issuing_authority', $customer->issuing_authority);
+                                        $set('customer_status_id', $customer->status_id);
+                                        $set('customer_agent_id', $customer->agent_id);
+                                        $set('customer_notes', $customer->notes);
+                                        $set('customer_special_case_note', $customer->special_case_note);
+                                        $set('customer_emergency_contact_name', $customer->emergency_contact_name);
+                                        $set('customer_emergency_contact_phone', $customer->emergency_contact_phone);
+                                    }
+                                }
+                            })
                             ->createOptionForm([
                                 TextInput::make('name')
                                     ->label('Full Name')
@@ -201,6 +221,73 @@ class TripForm
                             ->columnSpan(2),
                     ]),
 
+                // Customer Details Section
+                Section::make('Customer Details')
+                    ->description('Automatically populated when customer is selected')
+                    ->icon('heroicon-o-user')
+                    ->columns(2)
+                    ->columnSpan(3)
+                    ->schema([
+                        TextInput::make('customer_phone')
+                            ->label('Phone Number')
+                            ->disabled()
+                            ->dehydrated(false),
+                        TextInput::make('customer_email')
+                            ->label('Email Address')
+                            ->disabled()
+                            ->dehydrated(false),
+                        TextInput::make('customer_nationality')
+                            ->label('Nationality')
+                            ->disabled()
+                            ->dehydrated(false),
+                        Select::make('customer_document_type')
+                            ->label('Document Type')
+                            ->options([
+                                'national_id' => 'National ID',
+                                'passport' => 'Passport',
+                                'residence_permit' => 'Residence Permit',
+                                'driver_license' => 'Driver License',
+                                'other' => 'Other',
+                            ])
+                            ->native(false)
+                            ->disabled()
+                            ->dehydrated(false),
+                        TextInput::make('customer_document_no')
+                            ->label('Document Number')
+                            ->disabled()
+                            ->dehydrated(false),
+                        TextInput::make('customer_issuing_authority')
+                            ->label('Issuing Authority')
+                            ->disabled()
+                            ->dehydrated(false),
+                        Select::make('customer_status_id')
+                            ->label('Customer Status')
+                            ->disabled()
+                            ->dehydrated(false),
+                        Select::make('customer_agent_id')
+                            ->label('Assigned Agent')
+                            ->disabled()
+                            ->dehydrated(false),
+                        Textarea::make('customer_notes')
+                            ->label('General Notes')
+                            ->rows(2)
+                            ->disabled()
+                            ->dehydrated(false),
+                        Textarea::make('customer_special_case_note')
+                            ->label('Special Case Notes')
+                            ->rows(2)
+                            ->disabled()
+                            ->dehydrated(false),
+                        TextInput::make('customer_emergency_contact_name')
+                            ->label('Emergency Contact Name')
+                            ->disabled()
+                            ->dehydrated(false),
+                        TextInput::make('customer_emergency_contact_phone')
+                            ->label('Emergency Contact Phone')
+                            ->tel()
+                            ->disabled()
+                            ->dehydrated(false),
+                    ]),
                 // Route Information
                 Section::make('Route Information')
                     ->description('Specify pickup and drop-off locations')
