@@ -1,0 +1,201 @@
+<?php
+
+return [
+    'navigation' => [
+        'dashboard' => 'لوحة التحكم',
+        'operations' => 'العمليات الأساسية',
+        'fleet' => 'إدارة الأسطول',
+        'finance' => 'المالية',
+        'settings' => 'إعدادات النظام',
+        'customers' => 'إدارة العملاء',
+        'admin' => 'الإدارة العامة',
+        'reports' => 'التقارير والتحليلات',
+    ],
+    'trips' => [
+        'label' => 'رحلة',
+        'plural_label' => 'الرحلات',
+        'fields' => [
+            'code' => 'رمز الرحلة',
+            'status' => 'الحالة',
+            'service_kind' => 'نوع الخدمة',
+            'customer' => 'العميل',
+            'vehicle_type' => 'نوع المركبة',
+            'origin' => 'موقع الانطلاق',
+            'destination' => 'موقع الوصول',
+            'start_at' => 'تاريخ ووقت البدء',
+            'passenger_count' => 'عدد الركاب',
+            'amount' => 'المبلغ الأساسي',
+            'final_amount' => 'المبلغ الإجمالي',
+            'hotel_name' => 'اسم الفندق',
+            'route_template' => 'قالب تسعير المسار',
+        ],
+        'enums' => [
+            'scheduled' => 'مجدولة',
+            'in_progress' => 'جارية',
+            'completed' => 'مكتملة',
+            'cancelled' => 'ملغاة',
+            'airport' => 'توصيل مطار',
+            'hotel' => 'توصيل فندق',
+            'city_tour' => 'جولة سياحية',
+        ]
+    ],
+    'customers' => [
+        'label' => 'عميل',
+        'plural_label' => 'العملاء',
+        'sections' => [
+            'personal' => 'المعلومات الشخصية',
+            'documents' => 'بيانات الهوية',
+            'assignment' => 'التخصيص والحالة',
+            'emergency' => 'جهة الاتصال للطوارئ',
+            'notes' => 'الملاحظات والحالات الخاصة',
+        ],
+        'fields' => [
+            'name' => 'الاسم الكامل',
+            'email' => 'البريد الإلكتروني',
+            'phone' => 'رقم الهاتف',
+            'nationality' => 'الجنسية',
+            'document_type' => 'نوع الوثيقة',
+            'document_no' => 'رقم الوثيقة',
+            'issuing_authority' => 'جهة الإصدار',
+            'status' => 'حالة العميل',
+            'agent' => 'الوكيل المعين',
+            'emergency_name' => 'اسم جهة الاتصال',
+            'emergency_phone' => 'هاتف الطوارئ',
+            'emergency_email' => 'بريد الطوارئ',
+            'notes' => 'ملاحظات عامة',
+            'special_notes' => 'ملاحظات الحالات الخاصة',
+        ],
+        'enums' => [
+            'id_card' => 'الهوية الوطنية',
+            'passport' => 'جواز السفر',
+            'residence' => 'الإقامة',
+            'other' => 'أخرى',
+        ]
+    ],
+    'travel_routes' => [
+        'label' => 'مسار رحلة',
+        'plural_label' => 'مسارات الرحلات',
+        'sections' => [
+            'info' => 'بيانات المسار',
+            'locations' => 'المواقع الجغرافية',
+            'details' => 'تفاصيل المسار',
+        ],
+        'fields' => [
+            'name_en' => 'اسم المسار (EN)',
+            'name_ar' => 'اسم المسار (AR)',
+            'type' => 'نوع المسار',
+            'distance' => 'المسافة المقدرة (كم)',
+            'duration' => 'المدة المقدرة (دقيقة)',
+            'active' => 'حالة التفعيل',
+            'description' => 'الوصف',
+        ]
+    ],
+    'route_templates' => [
+        'label' => 'تسعير المسار',
+        'plural_label' => 'أسعار المسارات',
+        'sections' => [
+            'info' => 'بيانات المسار',
+            'pricing' => 'التسعير',
+        ],
+        'fields' => [
+            'origin_city_en' => 'مدينة الانطلاق (EN)',
+            'origin_city_ar' => 'مدينة الانطلاق (AR)',
+            'destination_city_en' => 'مدينة الوصول (EN)',
+            'destination_city_ar' => 'مدينة الوصول (AR)',
+            'base_price' => 'السعر الأساسي',
+            'vehicle_type' => 'نوع المركبة',
+            'description' => 'الوصف',
+            'active' => 'نشط',
+        ]
+    ],
+    'drivers' => [
+        'label' => 'سائق',
+        'plural_label' => 'السائقين',
+        'sections' => [
+            'personal' => 'المعلومات الشخصية',
+            'license' => 'بيانات الرخصة',
+            'account' => 'الحساب والحالة',
+            'performance' => 'مؤشرات الأداء',
+            'vehicles' => 'المركبات المعينة',
+            'notes' => 'ملاحظات إضافية',
+        ],
+        'fields' => [
+            'name' => 'الاسم الكامل',
+            'phone' => 'رقم الهاتف',
+            'email' => 'البريد الإلكتروني',
+            'id_number' => 'رقم الهوية',
+            'photo' => 'الصورة الشخصية',
+            'license_number' => 'رقم الرخصة',
+            'license_expiry' => 'تاريخ انتهاء الرخصة',
+            'user' => 'حساب المستخدم',
+            'status' => 'حالة السائق',
+            'rating' => 'التقييم',
+            'total_trips' => 'الرحلات المكتملة',
+            'vehicles' => 'المركبات',
+            'notes' => 'الملاحظات',
+        ],
+        'enums' => [
+            'available' => 'متاح',
+            'busy' => 'مشغول',
+            'offline' => 'غير متصل',
+            'on_break' => 'في استراحة',
+        ]
+    ],
+    'vehicles' => [
+        'label' => 'مركبة',
+        'plural_label' => 'المركبات',
+        'sections' => [
+            'info' => 'معلومات المركبة',
+            'technical' => 'التفاصيل الفنية',
+            'status' => 'الحالة والتصاريح',
+            'drivers' => 'السائقين المصرح لهم',
+            'notes' => 'معلومات إضافية',
+        ],
+        'fields' => [
+            'plate_number' => 'رقم اللوحة',
+            'type' => 'نوع المركبة',
+            'model' => 'الموديل',
+            'color' => 'اللون',
+            'vin' => 'رقم الهيكل (VIN)',
+            'year' => 'سنة الصنع',
+            'status' => 'حالة المركبة',
+            'insurance_expiry' => 'تاريخ انتهاء التأمين',
+            'registration_expiry' => 'تاريخ انتهاء الاستمارة',
+            'drivers' => 'السائقين',
+            'notes' => 'الملاحظات',
+        ],
+        'enums' => [
+            'active' => 'نشطة',
+            'maintenance' => 'تحت الصيانة',
+            'inactive' => 'غير نشطة',
+        ]
+    ],
+    'vehicle_types' => [
+        'label' => 'نوع المركبة',
+        'plural_label' => 'أنواع المركبات',
+        'fields' => [
+            'name_en' => 'الاسم (EN)',
+            'name_ar' => 'الاسم (AR)',
+            'capacity' => 'السعة',
+            'description' => 'الوصف',
+            'active' => 'نشط',
+        ]
+    ],
+    'staff' => [
+        'label' => 'موظف',
+        'plural_label' => 'الموظفين',
+        'fields' => [
+            'user' => 'حساب المستخدم',
+            'employee_id' => 'الرقم الوظيفي',
+            'department' => 'القسم',
+            'job_title' => 'المسمى الوظيفي',
+            'hired_at' => 'تاريخ التعيين',
+            'birth_date' => 'تاريخ الميلاد',
+            'salary' => 'الراتب',
+            'emergency_contact' => 'جهة اتصال الطوارئ',
+            'address' => 'العنوان',
+            'notes' => 'الملاحظات',
+            'status' => 'الحالة',
+        ]
+    ]
+];

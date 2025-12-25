@@ -1,0 +1,201 @@
+<?php
+
+return [
+    'navigation' => [
+        'dashboard' => 'Dashboard',
+        'operations' => 'Core Operations',
+        'customers' => 'Customer Management',
+        'fleet' => 'Fleet Management',
+        'admin' => 'Admin Management',
+        'finance' => 'Finance',
+        'settings' => 'System Settings',
+        'reports' => 'Reports & Analytics',
+    ],
+    'trips' => [
+        'label' => 'Trip',
+        'plural_label' => 'Trips',
+        'fields' => [
+            'code' => 'Trip Code',
+            'status' => 'Status',
+            'service_kind' => 'Service Type',
+            'customer' => 'Customer',
+            'vehicle_type' => 'Vehicle Type',
+            'origin' => 'Pickup Location',
+            'destination' => 'Drop-off Location',
+            'start_at' => 'Start Date/Time',
+            'passenger_count' => 'Passengers',
+            'amount' => 'Base Amount',
+            'final_amount' => 'Final Amount',
+            'hotel_name' => 'Hotel Name',
+            'route_template' => 'Route Pricing Template',
+        ],
+        'enums' => [
+            'scheduled' => 'Scheduled',
+            'in_progress' => 'In Progress',
+            'completed' => 'Completed',
+            'cancelled' => 'Cancelled',
+            'airport' => 'Airport Transfer',
+            'hotel' => 'Hotel Transfer',
+            'city_tour' => 'City Tour',
+        ]
+    ],
+    'customers' => [
+        'label' => 'Customer',
+        'plural_label' => 'Customers',
+        'sections' => [
+            'personal' => 'Personal Information',
+            'documents' => 'Document Information',
+            'assignment' => 'Assignment & Status',
+            'emergency' => 'Emergency Contact',
+            'notes' => 'Notes & Special Cases',
+        ],
+        'fields' => [
+            'name' => 'Full Name',
+            'email' => 'Email Address',
+            'phone' => 'Phone Number',
+            'nationality' => 'Nationality',
+            'document_type' => 'Document Type',
+            'document_no' => 'Document Number',
+            'issuing_authority' => 'Issuing Authority',
+            'status' => 'Customer Status',
+            'agent' => 'Assigned Agent',
+            'emergency_name' => 'Contact Name',
+            'emergency_phone' => 'Contact Phone',
+            'emergency_email' => 'Contact Email',
+            'notes' => 'General Notes',
+            'special_notes' => 'Special Case Notes',
+        ],
+        'enums' => [
+            'id_card' => 'National ID Card',
+            'passport' => 'Passport',
+            'residence' => 'Residence Permit',
+            'other' => 'Other',
+        ]
+    ],
+    'travel_routes' => [
+        'label' => 'Travel Route',
+        'plural_label' => 'Travel Routes',
+        'sections' => [
+            'info' => 'Route Information',
+            'locations' => 'Locations',
+            'details' => 'Route Details',
+        ],
+        'fields' => [
+            'name_en' => 'Route Name (EN)',
+            'name_ar' => 'Route Name (AR)',
+            'type' => 'Route Type',
+            'distance' => 'Estimated Distance (km)',
+            'duration' => 'Estimated Duration (min)',
+            'active' => 'Active Status',
+            'description' => 'Description',
+        ]
+    ],
+    'route_templates' => [
+        'label' => 'Route Pricing',
+        'plural_label' => 'Route Pricing',
+        'sections' => [
+            'info' => 'Route Information',
+            'pricing' => 'Pricing',
+        ],
+        'fields' => [
+            'origin_city_en' => 'Origin City (EN)',
+            'origin_city_ar' => 'Origin City (AR)',
+            'destination_city_en' => 'Destination City (EN)',
+            'destination_city_ar' => 'Destination City (AR)',
+            'base_price' => 'Base Price',
+            'vehicle_type' => 'Vehicle Type',
+            'description' => 'Description',
+            'active' => 'Active',
+        ]
+    ],
+    'drivers' => [
+        'label' => 'Driver',
+        'plural_label' => 'Drivers',
+        'sections' => [
+            'personal' => 'Personal Information',
+            'license' => 'License Information',
+            'account' => 'Account & Status',
+            'performance' => 'Performance Metrics',
+            'vehicles' => 'Assigned Vehicles',
+            'notes' => 'Additional Notes',
+        ],
+        'fields' => [
+            'name' => 'Full Name',
+            'phone' => 'Phone Number',
+            'email' => 'Email Address',
+            'id_number' => 'National ID Number',
+            'photo' => 'Profile Photo',
+            'license_number' => 'Driver License Number',
+            'license_expiry' => 'License Expiry Date',
+            'user' => 'User Account',
+            'status' => 'Driver Status',
+            'rating' => 'Driver Rating',
+            'total_trips' => 'Total Trips Completed',
+            'vehicles' => 'Vehicles',
+            'notes' => 'Notes',
+        ],
+        'enums' => [
+            'available' => 'Available',
+            'busy' => 'Busy',
+            'offline' => 'Offline',
+            'on_break' => 'On Break',
+        ]
+    ],
+    'vehicles' => [
+        'label' => 'Vehicle',
+        'plural_label' => 'Vehicles',
+        'sections' => [
+            'info' => 'Vehicle Information',
+            'technical' => 'Technical Details',
+            'status' => 'Status & Compliance',
+            'drivers' => 'Assigned Drivers',
+            'notes' => 'Additional Information',
+        ],
+        'fields' => [
+            'plate_number' => 'License Plate',
+            'type' => 'Vehicle Type',
+            'model' => 'Model',
+            'color' => 'Color',
+            'vin' => 'VIN (Vehicle Identification Number)',
+            'year' => 'Year',
+            'status' => 'Vehicle Status',
+            'insurance_expiry' => 'Insurance Expiry Date',
+            'registration_expiry' => 'Registration Expiry Date',
+            'drivers' => 'Drivers',
+            'notes' => 'Notes',
+        ],
+        'enums' => [
+            'active' => 'Active',
+            'maintenance' => 'Under Maintenance',
+            'inactive' => 'Inactive',
+        ]
+    ],
+    'vehicle_types' => [
+        'label' => 'Vehicle Type',
+        'plural_label' => 'Vehicle Types',
+        'fields' => [
+            'name_en' => 'Name (EN)',
+            'name_ar' => 'Name (AR)',
+            'capacity' => 'Capacity',
+            'description' => 'Description',
+            'active' => 'Active',
+        ]
+    ],
+    'staff' => [
+        'label' => 'Staff Member',
+        'plural_label' => 'Staff Members',
+        'fields' => [
+            'user' => 'User Account',
+            'employee_id' => 'Employee ID',
+            'department' => 'Department',
+            'job_title' => 'Job Title',
+            'hired_at' => 'Hired Date',
+            'birth_date' => 'Date of Birth',
+            'salary' => 'Salary',
+            'emergency_contact' => 'Emergency Contact',
+            'address' => 'Address',
+            'notes' => 'Notes',
+            'status' => 'Status',
+        ]
+    ]
+];

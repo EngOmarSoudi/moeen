@@ -22,7 +22,20 @@ class StaffResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-briefcase';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Admin Management';
+    public static function getModelLabel(): string
+    {
+        return __('resources.staff.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('resources.staff.plural_label');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('resources.navigation.admin');
+    }
 
     protected static ?int $navigationSort = 3;
 

@@ -26,6 +26,7 @@ class Customer extends Model
         'special_case_note',
         'emergency_contact_name',
         'emergency_contact_phone',
+        'emergency_contact_email',
     ];
 
     public function status(): BelongsTo

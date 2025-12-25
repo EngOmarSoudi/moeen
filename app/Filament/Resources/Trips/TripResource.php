@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Trips;
 use App\Filament\Resources\Trips\Pages\CreateTrip;
 use App\Filament\Resources\Trips\Pages\EditTrip;
 use App\Filament\Resources\Trips\Pages\ListTrips;
+use App\Filament\Resources\Trips\Pages\ViewTrip;
 use App\Filament\Resources\Trips\Schemas\TripForm;
 use App\Filament\Resources\Trips\Tables\TripsTable;
 use App\Models\Trip;
@@ -23,11 +24,20 @@ class TripResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-map';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Operations';
+    public static function getModelLabel(): string
+    {
+        return __('resources.trips.label');
+    }
 
-    protected static ?int $navigationSort = -100;
+    public static function getPluralModelLabel(): string
+    {
+        return __('resources.trips.plural_label');
+    }
 
-    protected static ?string $recordTitleAttribute = 'code';
+    public static function getNavigationGroup(): ?string
+    {
+        return __('resources.navigation.operations');
+    }
 
     public static function getNavigationItems(): array
     {
@@ -40,7 +50,7 @@ class TripResource extends Resource
                 ->sort(static::getNavigationSort())
                 ->url(static::getNavigationUrl()),
             
-            NavigationItem::make('Create Trip')
+            NavigationItem::make(__('resources.trips.label') . ' +')
                 ->group(static::getNavigationGroup())
                 ->icon('heroicon-o-plus-circle')
                 ->sort(static::getNavigationSort() + 1)
@@ -70,6 +80,7 @@ class TripResource extends Resource
         return [
             'index' => ListTrips::route('/'),
             'create' => CreateTrip::route('/create'),
+            'view' => ViewTrip::route('/{record}'),
             'edit' => EditTrip::route('/{record}/edit'),
         ];
     }

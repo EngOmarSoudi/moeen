@@ -17,14 +17,12 @@ class TripSeeder extends Seeder
     public function run(): void
     {
         $customers = Customer::all();
-        $drivers = Driver::all();
-        $vehicles = Vehicle::all();
-        $tripTypes = TripType::all();
         $routes = TravelRoute::all();
         $agents = Agent::all();
         $users = User::all();
+        $vehicleTypes = \App\Models\VehicleType::all();
         
-        $statuses = ['scheduled', 'in_progress', 'completed', 'cancelled'];
+        $statuses = ['scheduled', 'pending', 'assigned', 'in_progress', 'completed', 'canceled'];
 
         for ($i = 0; $i < 50; $i++) {
             $status = $statuses[array_rand($statuses)];
@@ -33,10 +31,9 @@ class TripSeeder extends Seeder
             
             Trip::create([
                 'code' => 'TRP-' . str_pad($i + 1, 5, '0', STR_PAD_LEFT),
-                'trip_type_id' => $tripTypes->random()->id,
+
                 'customer_id' => $customers->random()->id,
-                'driver_id' => $drivers->random()->id,
-                'vehicle_id' => $vehicles->random()->id,
+                'vehicle_type_id' => $vehicleTypes->random()->id,
                 'travel_route_id' => $routes->random()->id,
                 'agent_id' => $agents->random()->id,
                 'origin' => 'Riyadh',
@@ -45,8 +42,8 @@ class TripSeeder extends Seeder
                 'completed_at' => $status === 'completed' ? $endTime : null,
                 'status' => $status,
                 'service_kind' => ['airport', 'hotel', 'city_tour'][array_rand(['airport', 'hotel', 'city_tour'])],
-                'customer_segment' => 'vip',
-                'trip_leg' => 1,
+                'customer_segment' => ['new', 'returning'][array_rand(['new', 'returning'])],
+                'trip_leg' => ['outbound', 'return'][array_rand(['outbound', 'return'])],
                 'passenger_count' => rand(1, 5),
                 'amount' => rand(50, 500),
                 'discount' => rand(0, 50),

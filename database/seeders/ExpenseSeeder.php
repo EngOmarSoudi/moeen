@@ -16,19 +16,13 @@ class ExpenseSeeder extends Seeder
         $categories = ['Fuel', 'Maintenance', 'Repair', 'Insurance', 'Toll', 'Parking', 'Cleaning'];
 
         for ($i = 0; $i < 30; $i++) {
-            $ownerType = rand(0, 1) === 0 ? Driver::class : Vehicle::class;
-            $ownerId = $ownerType === Driver::class ? $drivers->random()->id : $vehicles->random()->id;
-
             Expense::create([
                 'category' => $categories[array_rand($categories)],
                 'description' => 'Expense ' . ($i + 1),
                 'amount' => rand(50, 500),
-                'currency' => 'SAR',
                 'expense_date' => now()->subDays(rand(0, 30)),
-                'owner_id' => $ownerId,
-                'owner_type' => $ownerType,
-                'receipt_number' => 'RCP-' . rand(100000, 999999),
-                'notes' => 'Sample expense entry',
+                'driver_id' => $drivers->random()->id,
+                'vehicle_id' => $vehicles->random()->id,
             ]);
         }
     }

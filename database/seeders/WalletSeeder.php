@@ -15,11 +15,10 @@ class WalletSeeder extends Seeder
         $customers = Customer::all();
         foreach ($customers as $customer) {
             Wallet::create([
-                'owner_id' => $customer->id,
-                'owner_type' => Customer::class,
+                'walletable_id' => $customer->id,
+                'walletable_type' => Customer::class,
                 'balance' => rand(1000, 50000) / 10,
-                'currency' => 'SAR',
-                'is_active' => true,
+                'total_debt' => 0,
             ]);
         }
 
@@ -27,11 +26,10 @@ class WalletSeeder extends Seeder
         $drivers = Driver::all();
         foreach ($drivers as $driver) {
             Wallet::create([
-                'owner_id' => $driver->id,
-                'owner_type' => Driver::class,
+                'walletable_id' => $driver->id,
+                'walletable_type' => Driver::class,
                 'balance' => rand(5000, 100000) / 10,
-                'currency' => 'SAR',
-                'is_active' => true,
+                'total_collected' => 0,
             ]);
         }
     }

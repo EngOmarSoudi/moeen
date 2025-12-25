@@ -19,12 +19,16 @@ class WalletTransactionSeeder extends Seeder
                 $type = $types[array_rand($types)];
                 $amount = rand(100, 5000) / 10;
 
+                $balanceBefore = $wallet->balance;
+                $balanceAfter = $type === 'credit' ? $balanceBefore + $amount : $balanceBefore - $amount;
+                
                 WalletTransaction::create([
                     'wallet_id' => $wallet->id,
                     'type' => $type,
                     'amount' => $amount,
+                    'balance_before' => $balanceBefore,
+                    'balance_after' => $balanceAfter,
                     'description' => ucfirst($type) . ' transaction ' . ($i + 1),
-                    'reference_id' => 'TXN-' . uniqid(),
                     'created_at' => now()->subDays(rand(0, 30)),
                 ]);
             }

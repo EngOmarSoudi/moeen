@@ -11,7 +11,11 @@ class TravelRoute extends Model
         'name',
         'name_ar',
         'origin',
+        'origin_lat',
+        'origin_lng',
         'destination',
+        'destination_lat',
+        'destination_lng',
         'distance_km',
         'duration_minutes',
         'route_type',
@@ -23,6 +27,10 @@ class TravelRoute extends Model
         'distance_km' => 'decimal:2',
         'duration_minutes' => 'integer',
         'is_active' => 'boolean',
+        'origin_lat' => 'decimal:8',
+        'origin_lng' => 'decimal:8',
+        'destination_lat' => 'decimal:8',
+        'destination_lng' => 'decimal:8',
     ];
 
     public function waypoints(): HasMany

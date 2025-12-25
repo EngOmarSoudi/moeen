@@ -18,10 +18,11 @@ class TripEvaluationSeeder extends Seeder
             TripEvaluation::create([
                 'trip_id' => $trip->id,
                 'evaluation_form_id' => $forms->random()->id,
-                'rating' => rand(3, 5),
-                'feedback' => 'Sample evaluation feedback for trip ' . $trip->code,
-                'evaluator_name' => 'Customer ' . rand(1, 100),
-                'created_at' => $trip->completed_at ?? now(),
+                'target_type' => 'App\\Models\\VehicleType',
+                'target_id' => $trip->vehicle_type_id,
+                'score' => rand(300, 500) / 100, // Between 3.00 and 5.00
+                'answers' => json_encode(['field_1' => rand(3, 5), 'field_2' => rand(3, 5), 'field_3' => rand(3, 5)]),
+                'comments' => 'Sample evaluation feedback for trip ' . $trip->code,
             ]);
         }
     }

@@ -20,11 +20,20 @@ class TravelRouteResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-map-pin';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Operations';
+    public static function getModelLabel(): string
+    {
+        return __('resources.travel_routes.label');
+    }
 
-    protected static ?int $navigationSort = 3;
+    public static function getPluralModelLabel(): string
+    {
+        return __('resources.travel_routes.plural_label');
+    }
 
-    protected static ?string $recordTitleAttribute = 'name';
+    public static function getNavigationGroup(): ?string
+    {
+        return __('resources.navigation.operations');
+    }
 
     public static function form(Schema $schema): Schema
     {

@@ -20,7 +20,20 @@ class VehicleTypeResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-tag';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Fleet Management';
+    public static function getModelLabel(): string
+    {
+        return __('resources.vehicle_types.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('resources.vehicle_types.plural_label');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('resources.navigation.fleet');
+    }
 
     protected static ?int $navigationSort = 3;
 

@@ -18,29 +18,29 @@ class DriverForm
     {
         return $schema
             ->components([
-                Section::make('Personal Information')
+                Section::make(__('resources.drivers.sections.personal'))
                     ->schema([
                         Grid::make(2)
                             ->schema([
                                 TextInput::make('name')
-                                    ->label('Full Name')
+                                    ->label(__('resources.drivers.fields.name'))
                                     ->required()
                                     ->maxLength(255),
                                 TextInput::make('phone')
-                                    ->label('Phone Number')
+                                    ->label(__('resources.drivers.fields.phone'))
                                     ->tel()
                                     ->required()
                                     ->maxLength(20),
                                 TextInput::make('email')
-                                    ->label('Email Address')
+                                    ->label(__('resources.drivers.fields.email'))
                                     ->email()
                                     ->maxLength(255),
                                 TextInput::make('id_number')
-                                    ->label('National ID Number')
+                                    ->label(__('resources.drivers.fields.id_number'))
                                     ->maxLength(50),
                             ]),
                         FileUpload::make('photo')
-                            ->label('Profile Photo')
+                            ->label(__('resources.drivers.fields.photo'))
                             ->image()
                             ->imageEditor()
                             ->directory('drivers/photos')
@@ -49,15 +49,15 @@ class DriverForm
                     ])
                     ->columns(2),
 
-                Section::make('License Information')
+                Section::make(__('resources.drivers.sections.license'))
                     ->schema([
                         Grid::make(2)
                             ->schema([
                                 TextInput::make('license_number')
-                                    ->label('Driver License Number')
+                                    ->label(__('resources.drivers.fields.license_number'))
                                     ->maxLength(100),
                                 DatePicker::make('license_expiry')
-                                    ->label('License Expiry Date')
+                                    ->label(__('resources.drivers.fields.license_expiry'))
                                     ->native(false)
                                     ->displayFormat('Y-m-d')
                                     ->after('today'),
@@ -65,26 +65,26 @@ class DriverForm
                     ])
                     ->columns(2),
 
-                Section::make('Account & Status')
+                Section::make(__('resources.drivers.sections.account'))
                     ->schema([
                         Grid::make(2)
                             ->schema([
                                 Select::make('user_id')
-                                    ->label('User Account')
+                                    ->label(__('resources.drivers.fields.user'))
                                     ->relationship('user', 'name')
                                     ->searchable()
                                     ->preload()
                                     ->createOptionForm([
-                                        TextInput::make('name')->required(),
-                                        TextInput::make('email')->email()->required(),
+                                        TextInput::make('name')->required()->label(__('resources.customers.fields.name')), // Re-using customer name label for generic name
+                                        TextInput::make('email')->email()->required()->label(__('resources.customers.fields.email')),
                                     ]),
                                 Select::make('status')
-                                    ->label('Driver Status')
+                                    ->label(__('resources.drivers.fields.status'))
                                     ->options([
-                                        'available' => 'Available',
-                                        'busy' => 'Busy',
-                                        'offline' => 'Offline',
-                                        'on_break' => 'On Break',
+                                        'available' => __('resources.drivers.enums.available'),
+                                        'busy' => __('resources.drivers.enums.busy'),
+                                        'offline' => __('resources.drivers.enums.offline'),
+                                        'on_break' => __('resources.drivers.enums.on_break'),
                                     ])
                                     ->required()
                                     ->default('offline')
@@ -93,12 +93,12 @@ class DriverForm
                     ])
                     ->columns(2),
 
-                Section::make('Performance Metrics')
+                Section::make(__('resources.drivers.sections.performance'))
                     ->schema([
                         Grid::make(2)
                             ->schema([
                                 TextInput::make('rating')
-                                    ->label('Driver Rating')
+                                    ->label(__('resources.drivers.fields.rating'))
                                     ->numeric()
                                     ->minValue(0)
                                     ->maxValue(5)
@@ -108,7 +108,7 @@ class DriverForm
                                     ->disabled()
                                     ->dehydrated(false),
                                 TextInput::make('total_trips')
-                                    ->label('Total Trips Completed')
+                                    ->label(__('resources.drivers.fields.total_trips'))
                                     ->numeric()
                                     ->default(0)
                                     ->disabled()
@@ -117,23 +117,23 @@ class DriverForm
                     ])
                     ->columns(2),
 
-                Section::make('Assigned Vehicles')
-                    ->description('Select vehicles assigned to this driver')
+                Section::make(__('resources.drivers.sections.vehicles'))
+                    ->description(__('Select vehicles assigned to this driver'))
                     ->icon('heroicon-o-truck')
                     ->schema([
                         CheckboxList::make('vehicles')
-                            ->label('Vehicles')
+                            ->label(__('resources.drivers.fields.vehicles'))
                             ->relationship('vehicles', 'plate_number')
                             ->searchable()
                             ->columns(1)
-                            ->helperText('Check vehicles that this driver is authorized to use')
+                            ->helperText(__('Check vehicles that this driver is authorized to use'))
                             ->columnSpanFull(),
                     ]),
 
-                Section::make('Additional Notes')
+                Section::make(__('resources.drivers.sections.notes'))
                     ->schema([
                         Textarea::make('notes')
-                            ->label('Notes')
+                            ->label(__('resources.drivers.fields.notes'))
                             ->rows(4)
                             ->columnSpanFull(),
                     ])

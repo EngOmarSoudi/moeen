@@ -22,7 +22,20 @@ class DriverResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-user-group';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Fleet Management';
+    public static function getModelLabel(): string
+    {
+        return __('resources.drivers.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('resources.drivers.plural_label');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('resources.navigation.fleet');
+    }
 
     protected static ?int $navigationSort = 1;
 

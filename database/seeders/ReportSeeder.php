@@ -15,14 +15,12 @@ class ReportSeeder extends Seeder
 
         for ($i = 0; $i < 15; $i++) {
             Report::create([
-                'title' => $types[array_rand($types)] . ' - ' . ($i + 1),
+                'reference_no' => 'REP-' . date('Y') . '-' . str_pad($i + 1, 4, '0', STR_PAD_LEFT),
+                'subject' => $types[array_rand($types)] . ' - ' . ($i + 1),
                 'description' => 'Sample report description',
-                'type' => 'standard',
-                'period_start' => now()->subDays(rand(1, 30))->startOfDay(),
-                'period_end' => now()->endOfDay(),
+                'type' => 'complaint',
                 'created_by' => $users->random()->id,
-                'content' => json_encode(['data' => 'Sample report data']),
-                'is_published' => true,
+                'priority' => ['low', 'medium', 'high'][array_rand(['low', 'medium', 'high'])],
             ]);
         }
     }

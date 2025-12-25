@@ -22,16 +22,27 @@ class CustomerResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-users';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'CRM';
-
-    protected static ?int $navigationSort = 1;
-
-    protected static ?string $recordTitleAttribute = 'name';
-
-    public static function form(Schema $schema): Schema
+    public static function getModelLabel(): string
     {
-        return CustomerForm::configure($schema);
+        return __('resources.customers.label');
     }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('resources.customers.plural_label');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('resources.navigation.customers');
+    }
+
+    /*
+    public static function form(Form $form): Form
+    {
+        return CustomerForm::configure($form);
+    }
+    */
 
     public static function table(Table $table): Table
     {

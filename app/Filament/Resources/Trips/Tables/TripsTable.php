@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Trips\Tables;
 
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -21,13 +22,13 @@ class TripsTable
         return $table
             ->columns([
                 TextColumn::make('code')
-                    ->label('Trip Code')
+                    ->label(__('resources.trips.fields.code'))
                     ->searchable()
                     ->sortable()
                     ->copyable()
                     ->weight('bold'),
                 BadgeColumn::make('status')
-                    ->label('Status')
+                    ->label(__('resources.trips.fields.status'))
                     ->colors([
                         'warning' => 'scheduled',
                         'primary' => 'in_progress',
@@ -39,94 +40,93 @@ class TripsTable
                         'heroicon-o-arrow-path' => 'in_progress',
                         'heroicon-o-check-circle' => 'completed',
                         'heroicon-o-x-circle' => 'cancelled',
-                    ]),
+                    ])
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'scheduled' => __('resources.trips.enums.scheduled'),
+                        'in_progress' => __('resources.trips.enums.in_progress'),
+                        'completed' => __('resources.trips.enums.completed'),
+                        'cancelled' => __('resources.trips.enums.cancelled'),
+                        default => $state,
+                    }),
                 TextColumn::make('customer.name')
-                    ->label('Customer')
+                    ->label(__('resources.trips.fields.customer'))
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('driver.name')
-                    ->label('Driver')
-                    ->searchable()
-                    ->sortable()
-                    ->placeholder('Not Assigned'),
-                TextColumn::make('vehicle.plate_number')
-                    ->label('Vehicle')
-                    ->sortable()
-                    ->placeholder('Not Assigned'),
-                TextColumn::make('tripType.name')
-                    ->label('Type')
-                    ->sortable()
-                    ->badge(),
+
                 TextColumn::make('origin')
-                    ->label('Origin')
+                    ->label(__('resources.trips.fields.origin'))
                     ->searchable()
                     ->limit(20),
                 TextColumn::make('destination')
-                    ->label('Destination')
+                    ->label(__('resources.trips.fields.destination'))
                     ->searchable()
                     ->limit(20),
                 TextColumn::make('start_at')
-                    ->label('Start Date')
+                    ->label(__('resources.trips.fields.start_at'))
                     ->dateTime('M d, Y H:i')
                     ->sortable(),
                 TextColumn::make('passenger_count')
-                    ->label('Passengers')
+                    ->label(__('resources.trips.fields.passenger_count'))
                     ->alignCenter()
                     ->sortable(),
                 TextColumn::make('final_amount')
-                    ->label('Amount')
-                    ->money('SAR')
+                    ->label(__('resources.trips.fields.final_amount'))
+                    ->money('SAR') // Ideally should handle currency formatting too but SAR is fixed here
                     ->sortable()
                     ->alignEnd(),
                 BadgeColumn::make('service_kind')
-                    ->label('Service')
+                    ->label(__('resources.trips.fields.service_kind'))
                     ->colors([
-                        'primary' => 'trip',
-                        'warning' => 'hotel_booking',
-                        'success' => 'package',
+                        'primary' => 'airport',
+                        'warning' => 'hotel',
+                        'success' => 'city_tour',
                     ])
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'airport' => __('resources.trips.enums.airport'),
+                        'hotel' => __('resources.trips.enums.hotel'),
+                        'city_tour' => __('resources.trips.enums.city_tour'),
+                        default => $state,
+                    })
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('agent.name')
-                    ->label('Agent')
+                    ->label(__('Agent'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
-                    ->label('Created')
+                    ->label(__('Created'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 SelectFilter::make('status')
+                    ->label(__('resources.trips.fields.status'))
                     ->options([
-                        'scheduled' => 'Scheduled',
-                        'in_progress' => 'In Progress',
-                        'completed' => 'Completed',
-                        'cancelled' => 'Cancelled',
+                        'scheduled' => __('resources.trips.enums.scheduled'),
+                        'in_progress' => __('resources.trips.enums.in_progress'),
+                        'completed' => __('resources.trips.enums.completed'),
+                        'cancelled' => __('resources.trips.enums.cancelled'),
                     ])
                     ->multiple(),
                 SelectFilter::make('service_kind')
-                    ->label('Service Type')
+                    ->label(__('resources.trips.fields.service_kind'))
                     ->options([
-                        'trip' => 'Trip',
-                        'hotel_booking' => 'Hotel Booking',
-                        'package' => 'Package',
+                        'airport' => __('resources.trips.enums.airport'),
+                        'hotel' => __('resources.trips.enums.hotel'),
+                        'city_tour' => __('resources.trips.enums.city_tour'),
                     ]),
-                SelectFilter::make('trip_type_id')
-                    ->label('Trip Type')
-                    ->relationship('tripType', 'name')
-                    ->searchable()
-                    ->preload(),
-                SelectFilter::make('driver_id')
-                    ->label('Driver')
-                    ->relationship('driver', 'name')
-                    ->searchable()
-                    ->preload(),
-                TrashedFilter::make(),
+                TrashedFilter::make()
+                    ->label(__('Trashed')),
             ])
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
+                Action::make('print')
+                    ->label(__('Print Trip'))
+                    ->icon('heroicon-o-printer')
+                    ->color('info')
+                    ->url(fn ($record) => route('trips.print', ['trip' => $record, 'print' => true]))
+                    ->openUrlInNewTab(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

@@ -20,4 +20,21 @@ class EditTrip extends EditRecord
             RestoreAction::make(),
         ];
     }
+
+    protected function getFormActions(): array
+    {
+        $actions = parent::getFormActions();
+        
+        $printAction = \Filament\Actions\Action::make('print')
+            ->label('Print')
+            ->icon('heroicon-o-printer')
+            ->color('info')
+            ->url(fn () => route('trips.print', ['trip' => $this->record, 'print' => true]))
+            ->openUrlInNewTab();
+
+        // Insert print action after "Save"
+        array_splice($actions, 1, 0, [$printAction]);
+
+        return $actions;
+    }
 }

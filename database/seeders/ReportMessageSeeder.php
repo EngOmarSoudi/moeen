@@ -17,8 +17,8 @@ class ReportMessageSeeder extends Seeder
             for ($i = 0; $i < rand(1, 3); $i++) {
                 ReportMessage::create([
                     'report_id' => $report->id,
-                    'message' => 'Message ' . ($i + 1) . ' for report ' . $report->title,
-                    'message_type' => ['note', 'warning', 'info'][rand(0, 2)],
+                    'message' => 'Message ' . ($i + 1) . ' for report ' . $report->subject,
+                    'is_internal' => rand(0, 1),
                 ]);
             }
         }

@@ -20,12 +20,10 @@ class AlertSeeder extends Seeder
         foreach ($trips->random(10) as $trip) {
             Alert::create([
                 'alert_type_id' => $alertTypes->where('name', 'Delay Warning')->first()->id,
-                'alertable_id' => $trip->id,
-                'alertable_type' => Trip::class,
-                'message' => 'Trip ' . $trip->code . ' is running late',
-                'severity' => 'medium',
-                'status' => 'open',
-                'created_at' => now(),
+                'trip_id' => $trip->id,
+                'title' => 'Trip ' . $trip->code . ' is running late',
+                'description' => 'Trip ' . $trip->code . ' is running late',
+                'status' => 'new',
             ]);
         }
 
@@ -33,12 +31,10 @@ class AlertSeeder extends Seeder
         foreach ($drivers->random(5) as $driver) {
             Alert::create([
                 'alert_type_id' => $alertTypes->where('name', 'Document Expiry')->first()->id,
-                'alertable_id' => $driver->id,
-                'alertable_type' => Driver::class,
-                'message' => 'License expiry approaching for ' . $driver->name,
-                'severity' => 'medium',
-                'status' => 'open',
-                'created_at' => now(),
+                'driver_id' => $driver->id,
+                'title' => 'License expiry approaching for ' . $driver->name,
+                'description' => 'License expiry approaching for ' . $driver->name,
+                'status' => 'new',
             ]);
         }
     }

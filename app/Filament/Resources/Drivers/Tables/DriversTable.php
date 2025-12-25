@@ -22,24 +22,25 @@ class DriversTable
         return $table
             ->columns([
                 ImageColumn::make('photo')
-                    ->label('Photo')
+                    ->label(__('resources.drivers.fields.photo'))
                     ->circular()
                     ->defaultImageUrl(url('/images/default-avatar.png')),
                 TextColumn::make('name')
-                    ->label('Name')
+                    ->label(__('resources.drivers.fields.name'))
                     ->searchable()
                     ->sortable()
                     ->weight('bold'),
                 TextColumn::make('phone')
-                    ->label('Phone')
+                    ->label(__('resources.drivers.fields.phone'))
                     ->searchable()
                     ->copyable(),
                 TextColumn::make('email')
-                    ->label('Email')
+                    ->label(__('resources.drivers.fields.email'))
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 BadgeColumn::make('status')
-                    ->label('Status')
+                    ->label(__('resources.drivers.fields.status'))
+                    ->formatStateUsing(fn ($state) => __('resources.drivers.enums.' . $state))
                     ->colors([
                         'success' => 'available',
                         'warning' => 'busy',
@@ -53,11 +54,11 @@ class DriversTable
                         'heroicon-o-pause-circle' => 'on_break',
                     ]),
                 TextColumn::make('license_number')
-                    ->label('License No.')
+                    ->label(__('resources.drivers.fields.license_number'))
                     ->searchable()
                     ->toggleable(),
                 TextColumn::make('license_expiry')
-                    ->label('License Expiry')
+                    ->label(__('resources.drivers.fields.license_expiry'))
                     ->date('M d, Y')
                     ->sortable()
                     ->toggleable()
@@ -65,23 +66,23 @@ class DriversTable
                         $record->license_expiry && $record->license_expiry->isPast() ? 'danger' : null
                     ),
                 TextColumn::make('rating')
-                    ->label('Rating')
+                    ->label(__('resources.drivers.fields.rating'))
                     ->numeric(1)
                     ->suffix(' ★')
                     ->sortable()
                     ->alignCenter()
                     ->color('warning'),
                 TextColumn::make('total_trips')
-                    ->label('Total Trips')
+                    ->label(__('resources.drivers.fields.total_trips'))
                     ->numeric()
                     ->sortable()
                     ->alignCenter(),
                 TextColumn::make('user.name')
-                    ->label('User Account')
+                    ->label(__('resources.drivers.fields.user'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
-                    ->label('Created')
+                    ->label(__('Created At'))
                     ->dateTime('M d, Y')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

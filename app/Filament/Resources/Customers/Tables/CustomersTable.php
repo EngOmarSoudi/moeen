@@ -18,31 +18,42 @@ class CustomersTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label(__('resources.customers.fields.name'))
                     ->searchable(),
                 TextColumn::make('phone')
+                    ->label(__('resources.customers.fields.phone'))
                     ->searchable(),
                 TextColumn::make('email')
-                    ->label('Email address')
+                    ->label(__('resources.customers.fields.email'))
                     ->searchable(),
                 TextColumn::make('nationality')
+                    ->label(__('resources.customers.fields.nationality'))
                     ->searchable(),
                 TextColumn::make('document_type')
+                    ->label(__('resources.customers.fields.document_type'))
+                    ->formatStateUsing(fn ($state) => __('resources.customers.enums.' . $state))
                     ->searchable(),
                 TextColumn::make('document_no')
+                    ->label(__('resources.customers.fields.document_no'))
                     ->searchable(),
                 TextColumn::make('issuing_authority')
+                    ->label(__('resources.customers.fields.issuing_authority'))
                     ->searchable(),
                 TextColumn::make('status.name')
+                    ->label(__('resources.customers.fields.status'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('agent.name')
+                    ->label(__('resources.customers.fields.agent'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('created_at')
+                    ->label(__('Created At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label(__('Updated At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
