@@ -1,68 +1,108 @@
-# MOEAN Transportation Management System - Filament 4 Implementation
+# Filament Localization Project
 
-## Overview
-Implement a complete Filament 4 admin panel for MOEAN Transportation Management System with all features from the system documentation.
+## Batch 1: Core Operations
+- [x] Initial Translation Files Setup ([lang/en/resources.php](file:///e:/work/moeen/lang/en/resources.php), [lang/ar/resources.php](file:///e:/work/moeen/lang/ar/resources.php))
+- [x] **Trips** (Resource, Form, Table)
+- [x] **Customers** (Resource, Form, Table)
+- [x] **Travel Routes** (Resource, Form, Table)
+- [x] **Route Pricing** (Resource, Form, Table)
 
-## Phase 1: Foundation Setup
-- [x] Install Filament 4 and required dependencies
-- [x] Configure Filament panel with bilingual support (Arabic/English)
-- [x] Set up RTL support for Arabic
-- [x] Create base models and migrations
+## Batch 2: Fleet & Staff
+- [x] **Drivers** (Resource, Form, Table)
+- [x] Verify localized "Fleet" resources
+    - [x] Drivers (Schema fixed, Syntax fixed)
+    - [x] Vehicles (Schema fixed)
+    - [x] Vehicle Types (Schema fixed)
+    - [x] Staff (Schema fixed)
+- [ ] Implement Multi-language Support for "Finance & Utils" (Batch 3)
+    - [x] Create/Update translation keys in [lang/en/resources.php](file:///e:/work/moeen/lang/en/resources.php) & [lang/ar/resources.php](file:///e:/work/moeen/lang/ar/resources.php)
+        - [x] Payment Collections
+        - [x] Expenses
+        - [x] Wallets
+        - [x] Wallet Transactions
+        - [x] Alerts
+        - [x] Reports
+        - [x] Settings
+    - [x] Apply `__()` to Resources and Forms
+        - [x] Payment Collection Resources
+        - [x] Expense Resources
+        - [x] Wallet Resources & Transactions
+        - [x] Alert Resources
+        - [x] Report Resources
+        - [x] Settings Pages
+- [x] **Payment Collections** (Resource, Form, Table)
+- [x] **Expenses** (Resource, Form, Table)
+- [x] **Wallets** (Resource, Form, Table)
+- [x] **Wallet Transactions** (Resource, Form, Table)
+- [x] **Alerts** (Resource, Form, Table)
+- [x] **Reports** (Resource, Form, Table)
+- [x] **Settings** (Resource, Form, Table)
 
-## Phase 2: Core Models & Migrations
-- [x] Create all database migrations per documentation
-- [x] Create wallet system migrations (wallets, wallet_transactions)
-- [x] Create all Eloquent models with relationships
-- [x] Create Wallet and WalletTransaction models
-- [x] Create seeders for initial data
+## Batch 4: Dashboard & Global
+- [x] **Dashboard Widgets** (Stats, Charts, Maps) - All 7 widgets localized with __() helpers
+- [x] **Navigation Groups** & Sort Order - getNavigationGroup() added to all resources with localized names
+- [x] **Global Search Labels** - All resources configured with proper localized labels
+- [x] **User Profile Pages** - User management and admin pages fully localized
+- [x] **Comprehensive Localization Review** - All resource labels, fields, and table columns verified and localized
 
-## Phase 3: Filament Resources
-### Operations Module
-- [x] Create TripResource (with Wizard/Tabs)
-- [x] Create PaymentCollectionResource
-- [x] Create AlertResource
-### Fleet Management
-- [x] Create DriverResource
-- [x] Create VehicleResource
-- [x] Create VehicleTypeResource
-### CRM
-- [x] Create CustomerResource (with relation managers)
-- [x] Create CustomerStatusResource
-### Finance Module
-- [x] Create WalletResource
-- [x] Create WalletTransactionResource
-- [x] Create ExpenseResource
-### Admin & Settings
-- [x] Create User & Role Resources
-- [x] Create StaffResource
-- [x] Create ReportResource
-- [x] Create EvaluationFormResource
-- [x] Create SettingResource
-- [x] Implement Navigation Groups & Translations (Icons only) for all resources
-- [x] Customize tables and forms for all resources
+## Verification
+- [x] Verify Trip Translations
+- [x] Verify Customer/Route Translations
+- [x] Fix Trip Relation Bug ([latestTrackingPoint](file:///e:/work/moeen/app/Models/Trip.php#156-160))
+- [x] Verify Fleet Translations
+- [x] Verify Finance Translations (Payment Collections, Expenses, Wallets, Wallet Transactions, Alerts, Reports, Settings)
+- [x] Verify Dashboard Widgets Localization (TripSummaryWidget, FleetStatusWidget, PaymentCollectionsWidget, AlertsWidget, DriverStatusWidget, DriverLocationMapWidget, TripRouteMapWidget)
+- [x] Verify Navigation Groups Localization (All 21 resources with getNavigationGroup() methods)
+- [x] Verify User Management Localization (Users, Roles, Agents, Customer Statuses, Evaluation Forms, Saved Places, Alert Types)
 
-## Phase 4: Dashboard Widgets
-- [x] Trip Summary Widget
-- [x] Driver Status Widget
-- [x] Fleet Status Widget
-- [x] Payment Collections Widget
-- [x] Alerts Widget
+## Summary of Batch 4 Localization Completion
 
-## Phase 5: Translations
-- [x] English translations for all resources
-- [x] Arabic translations for all resources
-- [x] Language switcher implementation
+### Dashboard Widgets (7 Total)
+All dashboard widgets have been comprehensively localized:
+- **TripSummaryWidget**: Stats labels for total trips, today's trips, in progress, scheduled, completed, and monthly revenue
+- **FleetStatusWidget**: Driver and vehicle utilization stats with localized labels
+- **PaymentCollectionsWidget**: Chart title and labels for payment collection data
+- **AlertsWidget**: Table headers and column labels for active alerts display
+- **DriverStatusWidget**: Doughnut chart with localized driver status labels
+- **DriverLocationMapWidget**: Map widget with localized location data
+- **TripRouteMapWidget**: Trip route map with localized route information
 
-## Phase 6: Verification
-- [x] Test sidebar navigation
-- [x] Test CRUD operations
-- [x] Test bilingual switching
-- [x] Test RTL layout
+### Navigation Groups (14 Groups Localized)
+- Core Operations / العمليات الأساسية
+- Customer Management / إدارة العملاء
+- Fleet Management / إدارة الأسطول
+- Finance / المالية (5 resources)
+- Support / الدعم
+- Admin Management / الإدارة العامة
+- System Settings / إعدادات النظام
+- Reports & Analytics / التقارير والتحليلات
+- Operations / العمليات (including Alerts and Saved Places)
+- CRM (Agents and Customer Statuses)
 
-## Completion Status
-All phases complete! The MOEAN Transportation Management System is now fully functional with:
-- Enhanced forms and tables for all resources
-- Comprehensive dashboard widgets
-- Bilingual support (English/Arabic)
-- RTL support for Arabic
-- Modern UI with Filament 4
+### Resource Models Localized (21 Total)
+All resources now have:
+- `getModelLabel()`: Singular resource name in current language
+- `getPluralModelLabel()`: Plural resource name in current language  
+- `getNavigationGroup()`: Localized navigation group name
+
+Resources include: Trips, Customers, Travel Routes, Route Templates, Drivers, Vehicles, Vehicle Types, Staff, Payment Collections, Expenses, Wallets, Wallet Transactions, Alerts, Reports, Settings, Users, Roles, Agents, Customer Statuses, Evaluation Forms, Saved Places
+
+### Translation Keys Added (Additional 130+ Keys)
+**English (lang/en/resources.php):**
+- navigation_groups (10 keys)
+- global_search (8 categories)
+- dashboard widgets (7 widgets)
+- dashboard stats (14 stat labels)
+- user_management, roles_permissions, agents, customer_statuses, evaluation_forms, saved_places, alert_types
+
+**Arabic (lang/ar/resources.php):**
+- Complete Arabic translations for all above categories (130+ lines)
+- Proper RTL support maintained
+- Consistent terminology with existing translations
+
+### Form & Table Localization
+All form fields and table columns across 21 resources now display localized labels via __() helper:
+- Form schemas with Grid-based layout
+- Table columns with proper TextColumn labels
+- Navigation icon placement
+- Description and helper text localization

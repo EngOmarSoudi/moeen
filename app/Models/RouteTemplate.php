@@ -40,6 +40,14 @@ class RouteTemplate extends Model
         return $query->where('is_active', true);
     }
 
+    public function scopeSearchable($query, $search)
+    {
+        return $query->where('origin_city', 'like', "%{$search}%")
+                     ->orWhere('destination_city', 'like', "%{$search}%")
+                     ->orWhere('origin_city_ar', 'like', "%{$search}%")
+                     ->orWhere('destination_city_ar', 'like', "%{$search}%");
+    }
+
     public function scopeForVehicleType($query, $vehicleTypeId)
     {
         return $query->where(function ($q) use ($vehicleTypeId) {

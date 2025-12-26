@@ -3,7 +3,7 @@ import PasswordController from '@/actions/App/Http/Controllers/Settings/Password
 import InputError from '@/components/InputError.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
-import { edit } from '@/routes/user-password';
+import { edit, settingsUpdate } from '@/routes/user-password';
 import { Form, Head } from '@inertiajs/vue3';
 
 import HeadingSmall from '@/components/HeadingSmall.vue';
@@ -32,7 +32,7 @@ const breadcrumbItems: BreadcrumbItem[] = [
                 />
 
                 <Form
-                    v-bind="PasswordController.update.form()"
+                    v-bind="settingsUpdate.form()"
                     :options="{
                         preserveScroll: true,
                     }"

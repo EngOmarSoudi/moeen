@@ -9,6 +9,9 @@ use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Table;
 
 class AgentResource extends Resource
@@ -18,6 +21,21 @@ class AgentResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-briefcase';
     
     protected static string|\UnitEnum|null $navigationGroup = 'CRM';
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'CRM';
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('resources.agents.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('resources.agents.plural_label');
+    }
 
     public static function form(Schema $schema): Schema
     {
@@ -70,11 +88,11 @@ class AgentResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }

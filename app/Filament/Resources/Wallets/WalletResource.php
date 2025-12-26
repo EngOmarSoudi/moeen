@@ -26,6 +26,21 @@ class WalletResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'id';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('resources.navigation_groups.finance');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('resources.wallets.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('resources.wallets.plural_label');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return WalletForm::configure($schema);

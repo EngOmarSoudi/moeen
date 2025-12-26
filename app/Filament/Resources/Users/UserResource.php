@@ -26,6 +26,21 @@ class UserResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('resources.navigation_groups.admin_management');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('resources.user_management.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('resources.user_management.plural_label');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return UserForm::configure($schema);

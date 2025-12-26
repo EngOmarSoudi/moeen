@@ -40,6 +40,7 @@ class DriverLocationMapWidget extends Widget
     {
         return [
             'drivers' => $this->getDriverLocations(),
+            'title' => __('resources.dashboard.widgets.driver_location'),
         ];
     }
 }

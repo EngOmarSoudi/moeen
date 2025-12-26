@@ -28,6 +28,21 @@ class ExpenseResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'category';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('resources.navigation_groups.finance');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('resources.expenses.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('resources.expenses.plural_label');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return ExpenseForm::configure($schema);

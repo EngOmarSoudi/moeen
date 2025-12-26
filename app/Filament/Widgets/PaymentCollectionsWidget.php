@@ -8,7 +8,13 @@ use Illuminate\Support\Facades\DB;
 
 class PaymentCollectionsWidget extends ChartWidget
 {
-    protected ?string $heading = 'Payment Collections - Last 7 Days';
+    protected ?string $heading = null;
+    
+    public function getHeading(): string
+    {
+        return __('resources.dashboard.widgets.payment_collections') . ' - ' . __('Last 7 Days');
+    }
+    
     protected static ?int $sort = 4;
     protected int | string | array $columnSpan = 'full';
 

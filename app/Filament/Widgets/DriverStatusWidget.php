@@ -7,7 +7,13 @@ use Filament\Widgets\ChartWidget;
 
 class DriverStatusWidget extends ChartWidget
 {
-    protected ?string $heading = 'Driver Status Overview';
+    protected ?string $heading = null;
+    
+    public function getHeading(): string
+    {
+        return __('resources.dashboard.widgets.driver_status');
+    }
+    
     protected static ?int $sort = 2;
     protected ?string $maxHeight = '300px';
 
@@ -21,7 +27,7 @@ class DriverStatusWidget extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'Driver Status',
+                    'label' => __('resources.drivers.plural_label'),
                     'data' => [$available, $busy, $offline, $onBreak],
                     'backgroundColor' => [
                         'rgb(34, 197, 94)',  // green - available
@@ -32,10 +38,10 @@ class DriverStatusWidget extends ChartWidget
                 ],
             ],
             'labels' => [
-                "Available ({$available})", 
-                "Busy ({$busy})", 
-                "Offline ({$offline})", 
-                "On Break ({$onBreak})"
+                __('resources.drivers.enums.available') . " ({$available})", 
+                __('resources.drivers.enums.busy') . " ({$busy})", 
+                __('resources.drivers.enums.offline') . " ({$offline})", 
+                __('resources.drivers.enums.on_break') . " ({$onBreak})"
             ],
         ];
     }

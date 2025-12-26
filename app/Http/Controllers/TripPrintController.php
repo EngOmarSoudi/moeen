@@ -9,7 +9,7 @@ class TripPrintController extends Controller
 {
     public function __invoke(Trip $trip)
     {
-        $trip->load(['customer', 'travelRoute', 'agent']);
+        $trip->load(['customer', 'travelRoute', 'agent', 'routeTemplate', 'latestTrackingPoint']);
         
         return view('trips.print', compact('trip'));
     }

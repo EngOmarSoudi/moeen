@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Trips\Pages;
 use App\Filament\Resources\Trips\TripResource;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
+use Illuminate\Contracts\Support\Htmlable;
 
 class ViewTrip extends ViewRecord
 {
@@ -28,5 +29,12 @@ class ViewTrip extends ViewRecord
         return [
             \App\Filament\Widgets\TripRouteMapWidget::class,
         ];
+    }
+
+    public function getTitle(): string | Htmlable
+    {
+        // Load relationships when viewing
+        $this->record->load(['customer', 'agent', 'routeTemplate']);
+        return 'Trip ' . ($this->record->code ?? '#');
     }
 }

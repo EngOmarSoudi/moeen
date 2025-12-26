@@ -26,6 +26,21 @@ class AlertResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'title';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('resources.navigation_groups.operations');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('resources.alerts.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('resources.alerts.plural_label');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return AlertForm::configure($schema);

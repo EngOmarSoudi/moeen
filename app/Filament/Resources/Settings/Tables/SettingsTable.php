@@ -15,10 +15,13 @@ class SettingsTable
         return $table
             ->columns([
                 TextColumn::make('key')
+                    ->label(__('resources.settings.fields.key'))
                     ->searchable(),
                 TextColumn::make('group')
+                    ->label(__('resources.settings.fields.group'))
                     ->searchable(),
                 TextColumn::make('type')
+                    ->label(__('resources.settings.fields.type'))
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

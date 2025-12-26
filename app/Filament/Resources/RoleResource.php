@@ -11,6 +11,10 @@ use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Tables\Actions\DeleteBulkAction;
 use Spatie\Permission\Models\Role;
 
 class RoleResource extends Resource
@@ -22,6 +26,21 @@ class RoleResource extends Resource
     protected static string|\UnitEnum|null $navigationGroup = 'Admin Management';
     
     protected static ?int $navigationSort = 2;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('resources.navigation_groups.admin_management');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('resources.roles_permissions.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('resources.roles_permissions.plural_label');
+    }
 
     public static function form(Schema $schema): Schema
     {
@@ -51,12 +70,12 @@ class RoleResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                EditAction::make(),
+                DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }

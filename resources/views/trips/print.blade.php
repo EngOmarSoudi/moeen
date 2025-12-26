@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trip Details - {{ $trip->code }}</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
     <style>
         @page {
             size: A4;
@@ -233,7 +235,29 @@
             </div>
         </div>
 
-
+        @if($trip->routeTemplate)
+        <div class="section">
+            <div class="section-title">Route Template Information</div>
+            <div class="grid">
+                <div class="info-group">
+                    <span class="label">Origin City</span>
+                    <span class="value">{{ $trip->routeTemplate->origin_city_en }} ({{ $trip->routeTemplate->origin_city_ar }})</span>
+                </div>
+                <div class="info-group">
+                    <span class="label">Destination City</span>
+                    <span class="value">{{ $trip->routeTemplate->destination_city_en }} ({{ $trip->routeTemplate->destination_city_ar }})</span>
+                </div>
+                <div class="info-group">
+                    <span class="label">Template Base Price</span>
+                    <span class="value">SAR {{ number_format($trip->routeTemplate->base_price, 2) }}</span>
+                </div>
+                <div class="info-group">
+                    <span class="label">Vehicle Type</span>
+                    <span class="value">{{ $trip->routeTemplate->vehicleType?->name ?? 'N/A' }}</span>
+                </div>
+            </div>
+        </div>
+        @endif
 
         <div class="section">
             <div class="section-title">Pricing & Payment</div>
@@ -268,6 +292,13 @@
         </div>
         @endif
 
+        @if($trip->origin_lat && $trip->origin_lng && $trip->destination_lat && $trip->destination_lng)
+        <div class="section no-print">
+            <div class="section-title">Route Map Visualization</div>
+            <div id="tripMap" style="width: 100%; height: 400px; border: 1px solid #ddd; border-radius: 4px; margin-top: 10px;"></div>
+        </div>
+        @endif
+
         <div class="footer">
             <p>This is a computer-generated voucher for MOEAN Transportation System.</p>
             <p>&copy; {{ date('Y') }} MOEAN System. All rights reserved.</p>
@@ -275,11 +306,60 @@
     </div>
 
     <script>
+        // Load Leaflet JS
+        const leafletScript = document.createElement('script');
+        leafletScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
+        leafletScript.onload = function() {
+            @if($trip->origin_lat && $trip->origin_lng && $trip->destination_lat && $trip->destination_lng)
+            initializeMap();
+            @endif
+        };
+        document.head.appendChild(leafletScript);
+
+        function initializeMap() {
+            const map = L.map('tripMap').setView([{{ $trip->origin_lat }}, {{ $trip->origin_lng }}], 12);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors',
+                maxZoom: 19,
+            }).addTo(map);
+
+            // Origin marker (green)
+            const originMarker = L.circleMarker([{{ $trip->origin_lat }}, {{ $trip->origin_lng }}], {
+                color: '#22c55e',
+                fillColor: '#22c55e',
+                fillOpacity: 0.8,
+                radius: 8,
+                weight: 2
+            }).addTo(map);
+            originMarker.bindPopup('<strong>Pickup Location</strong><br/>{{ $trip->origin }}');
+
+            // Destination marker (red)
+            const destMarker = L.circleMarker([{{ $trip->destination_lat }}, {{ $trip->destination_lng }}], {
+                color: '#ef4444',
+                fillColor: '#ef4444',
+                fillOpacity: 0.8,
+                radius: 8,
+                weight: 2
+            }).addTo(map);
+            destMarker.bindPopup('<strong>Drop-off Location</strong><br/>{{ $trip->destination }}');
+
+            // Draw a line between origin and destination
+            L.polyline(
+                [[{{ $trip->origin_lat }}, {{ $trip->origin_lng }}], [{{ $trip->destination_lat }}, {{ $trip->destination_lng }}]],
+                { color: '#3b82f6', weight: 2, opacity: 0.6 }
+            ).addTo(map);
+
+            // Fit map to show both markers
+            const group = new L.featureGroup([originMarker, destMarker]);
+            map.fitBounds(group.getBounds().pad(0.1));
+        }
+
         // Auto-print on load if query param set
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.has('print')) {
-                window.print();
+                setTimeout(() => window.print(), 1500);
             }
         };
     </script>

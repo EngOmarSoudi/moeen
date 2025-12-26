@@ -4,15 +4,26 @@ namespace App\Filament\Forms\Components;
 
 use App\Models\SavedPlace;
 use Filament\Forms\Components\Field;
+use Illuminate\View\View;
+use Closure;
 
 class TripLocationPicker extends Field
 {
-    protected string $view = 'filament.forms.components.trip-location-picker';
-
     protected string $locationType = 'origin';
     protected string $nameField = 'origin';
     protected string $latField = 'origin_lat';
     protected string $lngField = 'origin_lng';
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        
+        $this->dehydrated(true); // Ensure origin/destination names are saved
+        $this->view('filament.forms.components.trip-location-picker');
+        
+        // Make the field reactive to update when coordinates change
+        $this->reactive();
+    }
 
     public static function make(?string $name = null): static
     {
@@ -66,7 +77,7 @@ class TripLocationPicker extends Field
 
     public function getSavedPlaces(): array
     {
-        return SavedPlace::active()
+        return SavedPlace::where('is_active', true)
             ->orderBy('name')
             ->get()
             ->map(fn ($place) => [

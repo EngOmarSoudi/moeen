@@ -50,7 +50,7 @@ class RouteTemplateResource extends Resource
 
     protected static ?int $navigationSort = 4;
 
-    protected static ?string $recordTitleAttribute = 'display_name';
+    protected static ?string $recordTitleAttribute = 'origin_city';
 
     public static function form(Schema $schema): Schema
     {

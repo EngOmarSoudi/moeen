@@ -15,10 +15,10 @@ class TripRouteMapWidget extends Widget
 
     public function getScheduledTrips(): array
     {
-        $query = Trip::with(['customer']);
+        $query = Trip::with(['customer', 'agent', 'routeTemplate']);
 
         if ($this->record) {
-            // Single trip view - show this specific trip
+            // Single trip view - show this specific trip with all required data
             $query->where('id', $this->record->id);
         } else {
             // Dashboard view - show scheduled and in_progress trips
@@ -63,6 +63,7 @@ class TripRouteMapWidget extends Widget
     {
         return [
             'trips' => $this->getScheduledTrips(),
+            'title' => __('resources.dashboard.widgets.trip_route_map'),
         ];
     }
 }

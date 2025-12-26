@@ -197,5 +197,294 @@ return [
             'notes' => 'Notes',
             'status' => 'Status',
         ]
+    ],
+    'payment_collections' => [
+        'label' => 'Payment Collection',
+        'plural_label' => 'Payment Collections',
+        'fields' => [
+            'trip' => 'Trip',
+            'driver' => 'Driver',
+            'amount' => 'Amount',
+            'received' => 'Amount Received',
+            'change' => 'Change',
+            'method' => 'Payment Method',
+            'status' => 'Status',
+            'confirmed_by' => 'Confirmed By',
+            'confirmed_at' => 'Confirmed Date/Time',
+            'notes' => 'Notes',
+        ],
+        'enums' => [
+            'cash' => 'Cash',
+            'card' => 'Card',
+            'transfer' => 'Bank Transfer',
+            'pending' => 'Pending',
+            'confirmed' => 'Confirmed',
+            'cancelled' => 'Cancelled',
+        ]
+    ],
+    'expenses' => [
+        'label' => 'Expense',
+        'plural_label' => 'Expenses',
+        'fields' => [
+            'trip' => 'Trip',
+            'driver' => 'Driver',
+            'vehicle' => 'Vehicle',
+            'category' => 'Category',
+            'amount' => 'Amount',
+            'description' => 'Description',
+            'expense_date' => 'Expense Date',
+            'status' => 'Status',
+            'submitted_by' => 'Submitted By',
+            'approved_by' => 'Approved By',
+            'approved_at' => 'Approved Date/Time',
+            'rejection_reason' => 'Rejection Reason',
+        ],
+        'enums' => [
+            'fuel' => 'Fuel',
+            'maintenance' => 'Maintenance',
+            'toll' => 'Toll Fee',
+            'parking' => 'Parking',
+            'other' => 'Other',
+            'pending' => 'Pending',
+            'approved' => 'Approved',
+            'rejected' => 'Rejected',
+        ]
+    ],
+    'wallets' => [
+        'label' => 'Wallet',
+        'plural_label' => 'Wallets',
+        'fields' => [
+            'walletable_type' => 'Wallet Type',
+            'walletable_id' => 'Owner ID',
+            'balance' => 'Current Balance',
+            'total_debt' => 'Total Debt',
+            'total_collected' => 'Total Collected',
+            'budget_limit' => 'Budget Limit',
+            'budget_used' => 'Budget Used',
+        ]
+    ],
+    'wallet_transactions' => [
+        'label' => 'Wallet Transaction',
+        'plural_label' => 'Wallet Transactions',
+        'fields' => [
+            'wallet' => 'Wallet',
+            'trip' => 'Trip',
+            'type' => 'Transaction Type',
+            'amount' => 'Amount',
+            'balance_before' => 'Balance Before',
+            'balance_after' => 'Balance After',
+            'description' => 'Description',
+            'metadata' => 'Additional Information',
+            'created_by' => 'Created By',
+        ],
+        'enums' => [
+            'deposit' => 'Deposit',
+            'withdrawal' => 'Withdrawal',
+            'payment' => 'Payment',
+            'adjustment' => 'Adjustment',
+        ]
+    ],
+    'alerts' => [
+        'label' => 'Alert',
+        'plural_label' => 'Alerts',
+        'fields' => [
+            'alert_type' => 'Alert Type',
+            'trip' => 'Trip',
+            'driver' => 'Driver',
+            'vehicle' => 'Vehicle',
+            'title' => 'Title',
+            'description' => 'Description',
+            'status' => 'Status',
+            'resolved_at' => 'Resolved Date/Time',
+            'resolved_by' => 'Resolved By',
+            'resolution_notes' => 'Resolution Notes',
+        ],
+        'enums' => [
+            'new' => 'New',
+            'in_progress' => 'In Progress',
+            'resolved' => 'Resolved',
+            'closed' => 'Closed',
+        ]
+    ],
+    'reports' => [
+        'label' => 'Report',
+        'plural_label' => 'Reports',
+        'fields' => [
+            'reference_no' => 'Reference Number',
+            'type' => 'Report Type',
+            'subject' => 'Subject',
+            'description' => 'Description',
+            'trip' => 'Trip',
+            'driver' => 'Driver',
+            'customer' => 'Customer',
+            'priority' => 'Priority',
+            'status' => 'Status',
+            'assigned_to' => 'Assigned To',
+            'created_by' => 'Created By',
+            'resolved_at' => 'Resolved Date/Time',
+            'resolution_notes' => 'Resolution Notes',
+        ],
+        'enums' => [
+            'complaint' => 'Complaint',
+            'incident' => 'Incident',
+            'feedback' => 'Feedback',
+            'low' => 'Low',
+            'medium' => 'Medium',
+            'high' => 'High',
+            'urgent' => 'Urgent',
+            'open' => 'Open',
+            'in_progress' => 'In Progress',
+            'resolved' => 'Resolved',
+            'closed' => 'Closed',
+        ]
+    ],
+    'settings' => [
+        'label' => 'Setting',
+        'plural_label' => 'Settings',
+        'fields' => [
+            'key' => 'Setting Key',
+            'value' => 'Setting Value',
+            'group' => 'Setting Group',
+            'type' => 'Value Type',
+        ],
+        'enums' => [
+            'string' => 'Text',
+            'number' => 'Number',
+            'boolean' => 'Yes/No',
+            'json' => 'JSON Data',
+        ]
+    ],
+    'navigation_groups' => [
+        'dashboard' => 'Dashboard',
+        'core_operations' => 'Core Operations',
+        'customer_management' => 'Customer Management',
+        'fleet_management' => 'Fleet Management',
+        'finance' => 'Finance',
+        'support' => 'Support',
+        'admin_management' => 'Admin Management',
+        'system_settings' => 'System Settings',
+        'reports_analytics' => 'Reports & Analytics',
+        'operations' => 'Operations',
+    ],
+    'global_search' => [
+        'label' => 'Global Search',
+        'placeholder' => 'Search anything...',
+        'no_results' => 'No results found',
+        'categories' => [
+            'trips' => 'Trips',
+            'customers' => 'Customers',
+            'drivers' => 'Drivers',
+            'vehicles' => 'Vehicles',
+            'expenses' => 'Expenses',
+            'payments' => 'Payments',
+            'reports' => 'Reports',
+            'staff' => 'Staff',
+        ]
+    ],
+    'dashboard' => [
+        'title' => 'Dashboard',
+        'greeting' => 'Welcome back',
+        'widgets' => [
+            'trip_summary' => 'Trip Summary',
+            'fleet_status' => 'Fleet Status',
+            'payment_collections' => 'Payment Collections',
+            'driver_location' => 'Driver Locations',
+            'alerts' => 'Active Alerts',
+            'driver_status' => 'Driver Status',
+            'trip_route_map' => 'Trip Routes Map',
+        ],
+        'stats' => [
+            'total_trips' => 'Total Trips',
+            'todays_trips' => 'Today\'s Trips',
+            'in_progress' => 'In Progress',
+            'scheduled' => 'Scheduled',
+            'completed_today' => 'Completed Today',
+            'monthly_revenue' => 'Monthly Revenue',
+            'total_drivers' => 'Total Drivers',
+            'available_drivers' => 'Available Drivers',
+            'driver_utilization' => 'Driver Utilization',
+            'total_vehicles' => 'Total Vehicles',
+            'active_vehicles' => 'Active Vehicles',
+            'vehicle_utilization' => 'Vehicle Utilization',
+            'pending_alerts' => 'Pending Alerts',
+            'resolved_alerts' => 'Resolved Alerts',
+        ]
+    ],
+    'user_management' => [
+        'label' => 'User',
+        'plural_label' => 'Users',
+        'fields' => [
+            'name' => 'Full Name',
+            'email' => 'Email Address',
+            'password' => 'Password',
+            'password_confirmation' => 'Confirm Password',
+            'email_verified_at' => 'Email Verified',
+            'created_at' => 'Created Date',
+            'updated_at' => 'Updated Date',
+        ]
+    ],
+    'roles_permissions' => [
+        'label' => 'Role',
+        'plural_label' => 'Roles',
+        'fields' => [
+            'name' => 'Role Name',
+            'permissions' => 'Permissions',
+            'guard_name' => 'Guard',
+        ]
+    ],
+    'agents' => [
+        'label' => 'Agent',
+        'plural_label' => 'Agents',
+        'fields' => [
+            'name' => 'Agent Name',
+            'email' => 'Email',
+            'phone' => 'Phone',
+            'commission_rate' => 'Commission Rate',
+            'status' => 'Status',
+        ]
+    ],
+    'customer_statuses' => [
+        'label' => 'Customer Status',
+        'plural_label' => 'Customer Statuses',
+        'fields' => [
+            'name_en' => 'Status Name (EN)',
+            'name_ar' => 'Status Name (AR)',
+            'description' => 'Description',
+            'color' => 'Color Code',
+        ]
+    ],
+    'evaluation_forms' => [
+        'label' => 'Evaluation Form',
+        'plural_label' => 'Evaluation Forms',
+        'fields' => [
+            'name_en' => 'Form Name (EN)',
+            'name_ar' => 'Form Name (AR)',
+            'type' => 'Form Type',
+            'questions' => 'Questions',
+            'active' => 'Active',
+        ]
+    ],
+    'saved_places' => [
+        'label' => 'Saved Place',
+        'plural_label' => 'Saved Places',
+        'fields' => [
+            'name' => 'Place Name',
+            'latitude' => 'Latitude',
+            'longitude' => 'Longitude',
+            'address' => 'Address',
+            'place_type' => 'Place Type',
+            'user' => 'Owner',
+        ]
+    ],
+    'alert_types' => [
+        'label' => 'Alert Type',
+        'plural_label' => 'Alert Types',
+        'fields' => [
+            'name_en' => 'Alert Type (EN)',
+            'name_ar' => 'Alert Type (AR)',
+            'description' => 'Description',
+            'severity' => 'Severity Level',
+            'active' => 'Active',
+        ]
     ]
 ];

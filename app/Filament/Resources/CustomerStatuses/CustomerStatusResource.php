@@ -26,6 +26,21 @@ class CustomerStatusResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return 'CRM';
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('resources.customer_statuses.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('resources.customer_statuses.plural_label');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return CustomerStatusForm::configure($schema);

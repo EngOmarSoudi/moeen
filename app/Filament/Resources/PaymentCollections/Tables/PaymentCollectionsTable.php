@@ -15,28 +15,37 @@ class PaymentCollectionsTable
         return $table
             ->columns([
                 TextColumn::make('trip.id')
+                    ->label(__('resources.payment_collections.fields.trip'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('driver.name')
+                    ->label(__('resources.payment_collections.fields.driver'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('amount')
+                    ->label(__('resources.payment_collections.fields.amount'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('received')
+                    ->label(__('resources.payment_collections.fields.received'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('change')
+                    ->label(__('resources.payment_collections.fields.change'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('method')
+                    ->label(__('resources.payment_collections.fields.method'))
                     ->searchable(),
                 TextColumn::make('status')
+                    ->label(__('resources.payment_collections.fields.status'))
                     ->searchable(),
                 TextColumn::make('confirmed_by')
+                    ->label(__('resources.payment_collections.fields.confirmed_by'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('confirmed_at')
+                    ->label(__('resources.payment_collections.fields.confirmed_at'))
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('created_at')

@@ -15,25 +15,33 @@ class AlertsTable
         return $table
             ->columns([
                 TextColumn::make('alertType.name')
+                    ->label(__('resources.alerts.fields.alert_type'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('trip.id')
+                    ->label(__('resources.alerts.fields.trip'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('driver.name')
+                    ->label(__('resources.alerts.fields.driver'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('vehicle.id')
+                    ->label(__('resources.alerts.fields.vehicle'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('title')
+                    ->label(__('resources.alerts.fields.title'))
                     ->searchable(),
                 TextColumn::make('status')
+                    ->label(__('resources.alerts.fields.status'))
                     ->searchable(),
                 TextColumn::make('resolved_at')
+                    ->label(__('resources.alerts.fields.resolved_at'))
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('resolved_by')
+                    ->label(__('resources.alerts.fields.resolved_by'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('created_at')

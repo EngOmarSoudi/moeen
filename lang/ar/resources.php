@@ -197,5 +197,294 @@ return [
             'notes' => 'الملاحظات',
             'status' => 'الحالة',
         ]
+    ],
+    'payment_collections' => [
+        'label' => 'تحصيل الدفع',
+        'plural_label' => 'تحصيلات الدفع',
+        'fields' => [
+            'trip' => 'الرحلة',
+            'driver' => 'السائق',
+            'amount' => 'المبلغ',
+            'received' => 'المبلغ المستلم',
+            'change' => 'الفكة',
+            'method' => 'طريقة الدفع',
+            'status' => 'الحالة',
+            'confirmed_by' => 'تم التأكيد من قبل',
+            'confirmed_at' => 'تاريخ ووقت التأكيد',
+            'notes' => 'الملاحظات',
+        ],
+        'enums' => [
+            'cash' => 'نقداً',
+            'card' => 'بطاقة',
+            'transfer' => 'تحويل بنكي',
+            'pending' => 'قيد الانتظار',
+            'confirmed' => 'مؤكد',
+            'cancelled' => 'ملغى',
+        ]
+    ],
+    'expenses' => [
+        'label' => 'مصروف',
+        'plural_label' => 'المصروفات',
+        'fields' => [
+            'trip' => 'الرحلة',
+            'driver' => 'السائق',
+            'vehicle' => 'المركبة',
+            'category' => 'الفئة',
+            'amount' => 'المبلغ',
+            'description' => 'الوصف',
+            'expense_date' => 'تاريخ المصروف',
+            'status' => 'الحالة',
+            'submitted_by' => 'قدم من قبل',
+            'approved_by' => 'وافق عليه',
+            'approved_at' => 'تاريخ ووقت الموافقة',
+            'rejection_reason' => 'سبب الرفض',
+        ],
+        'enums' => [
+            'fuel' => 'الوقود',
+            'maintenance' => 'الصيانة',
+            'toll' => 'رسوم الطريق',
+            'parking' => 'مواقف السيارات',
+            'other' => 'أخرى',
+            'pending' => 'قيد الانتظار',
+            'approved' => 'موافق عليه',
+            'rejected' => 'مرفوض',
+        ]
+    ],
+    'wallets' => [
+        'label' => 'محفظة',
+        'plural_label' => 'المحافظ',
+        'fields' => [
+            'walletable_type' => 'نوع المحفظة',
+            'walletable_id' => 'معرّف المالك',
+            'balance' => 'الرصيد الحالي',
+            'total_debt' => 'إجمالي الديون',
+            'total_collected' => 'إجمالي المحصلات',
+            'budget_limit' => 'حد الميزانية',
+            'budget_used' => 'الميزانية المستخدمة',
+        ]
+    ],
+    'wallet_transactions' => [
+        'label' => 'معاملة محفظة',
+        'plural_label' => 'معاملات المحفظة',
+        'fields' => [
+            'wallet' => 'المحفظة',
+            'trip' => 'الرحلة',
+            'type' => 'نوع المعاملة',
+            'amount' => 'المبلغ',
+            'balance_before' => 'الرصيد قبل المعاملة',
+            'balance_after' => 'الرصيد بعد المعاملة',
+            'description' => 'الوصف',
+            'metadata' => 'معلومات إضافية',
+            'created_by' => 'أنشأ من قبل',
+        ],
+        'enums' => [
+            'deposit' => 'إيداع',
+            'withdrawal' => 'سحب',
+            'payment' => 'دفع',
+            'adjustment' => 'تعديل',
+        ]
+    ],
+    'alerts' => [
+        'label' => 'تنبيه',
+        'plural_label' => 'التنبيهات',
+        'fields' => [
+            'alert_type' => 'نوع التنبيه',
+            'trip' => 'الرحلة',
+            'driver' => 'السائق',
+            'vehicle' => 'المركبة',
+            'title' => 'العنوان',
+            'description' => 'الوصف',
+            'status' => 'الحالة',
+            'resolved_at' => 'تاريخ ووقت الحل',
+            'resolved_by' => 'تم الحل من قبل',
+            'resolution_notes' => 'ملاحظات الحل',
+        ],
+        'enums' => [
+            'new' => 'جديد',
+            'in_progress' => 'قيد المعالجة',
+            'resolved' => 'تم حله',
+            'closed' => 'مغلق',
+        ]
+    ],
+    'reports' => [
+        'label' => 'تقرير',
+        'plural_label' => 'التقارير',
+        'fields' => [
+            'reference_no' => 'رقم المرجع',
+            'type' => 'نوع التقرير',
+            'subject' => 'الموضوع',
+            'description' => 'الوصف',
+            'trip' => 'الرحلة',
+            'driver' => 'السائق',
+            'customer' => 'العميل',
+            'priority' => 'الأولوية',
+            'status' => 'الحالة',
+            'assigned_to' => 'مسند إلى',
+            'created_by' => 'أنشأ من قبل',
+            'resolved_at' => 'تاريخ ووقت الحل',
+            'resolution_notes' => 'ملاحظات الحل',
+        ],
+        'enums' => [
+            'complaint' => 'شكوى',
+            'incident' => 'حادثة',
+            'feedback' => 'تعليق',
+            'low' => 'منخفضة',
+            'medium' => 'متوسطة',
+            'high' => 'عالية',
+            'urgent' => 'عاجلة',
+            'open' => 'مفتوح',
+            'in_progress' => 'قيد المعالجة',
+            'resolved' => 'تم حله',
+            'closed' => 'مغلق',
+        ]
+    ],
+    'settings' => [
+        'label' => 'إعداد',
+        'plural_label' => 'الإعدادات',
+        'fields' => [
+            'key' => 'مفتاح الإعداد',
+            'value' => 'قيمة الإعداد',
+            'group' => 'مجموعة الإعدادات',
+            'type' => 'نوع القيمة',
+        ],
+        'enums' => [
+            'string' => 'نص',
+            'number' => 'رقم',
+            'boolean' => 'نعم/لا',
+            'json' => 'بيانات JSON',
+        ]
+    ],
+    'navigation_groups' => [
+        'dashboard' => 'لوحة التحكم',
+        'core_operations' => 'العمليات الأساسية',
+        'customer_management' => 'إدارة العملاء',
+        'fleet_management' => 'إدارة الأسطول',
+        'finance' => 'المالية',
+        'support' => 'الدعم',
+        'admin_management' => 'الإدارة العامة',
+        'system_settings' => 'إعدادات النظام',
+        'reports_analytics' => 'التقارير والتحليلات',
+        'operations' => 'العمليات',
+    ],
+    'global_search' => [
+        'label' => 'البحث العام',
+        'placeholder' => 'ابحث عن أي شيء...',
+        'no_results' => 'لم يتم العثور على نتائج',
+        'categories' => [
+            'trips' => 'الرحلات',
+            'customers' => 'العملاء',
+            'drivers' => 'السائقين',
+            'vehicles' => 'المركبات',
+            'expenses' => 'المصروفات',
+            'payments' => 'المدفوعات',
+            'reports' => 'التقارير',
+            'staff' => 'الموظفين',
+        ]
+    ],
+    'dashboard' => [
+        'title' => 'لوحة التحكم',
+        'greeting' => 'أهلا وسهلا',
+        'widgets' => [
+            'trip_summary' => 'ملخص الرحلات',
+            'fleet_status' => 'حالة الأسطول',
+            'payment_collections' => 'تحصيل المدفوعات',
+            'driver_location' => 'مواقع السائقين',
+            'alerts' => 'التنبيهات النشطة',
+            'driver_status' => 'حالة السائق',
+            'trip_route_map' => 'خريطة مسارات الرحلات',
+        ],
+        'stats' => [
+            'total_trips' => 'إجمالي الرحلات',
+            'todays_trips' => 'رحلات اليوم',
+            'in_progress' => 'قيد التنفيذ',
+            'scheduled' => 'مجدولة',
+            'completed_today' => 'المكتملة اليوم',
+            'monthly_revenue' => 'الإيرادات الشهرية',
+            'total_drivers' => 'إجمالي السائقين',
+            'available_drivers' => 'السائقين المتاحين',
+            'driver_utilization' => 'استخدام السائقين',
+            'total_vehicles' => 'إجمالي المركبات',
+            'active_vehicles' => 'المركبات النشطة',
+            'vehicle_utilization' => 'استخدام المركبات',
+            'pending_alerts' => 'التنبيهات المعلقة',
+            'resolved_alerts' => 'التنبيهات المحلولة',
+        ]
+    ],
+    'user_management' => [
+        'label' => 'مستخدم',
+        'plural_label' => 'المستخدمين',
+        'fields' => [
+            'name' => 'الاسم الكامل',
+            'email' => 'البريد الإلكتروني',
+            'password' => 'كلمة المرور',
+            'password_confirmation' => 'تأكيد كلمة المرور',
+            'email_verified_at' => 'التحقق من البريد',
+            'created_at' => 'تاريخ الإنشاء',
+            'updated_at' => 'تاريخ التحديث',
+        ]
+    ],
+    'roles_permissions' => [
+        'label' => 'دور',
+        'plural_label' => 'الأدوار',
+        'fields' => [
+            'name' => 'اسم الدور',
+            'permissions' => 'الأذونات',
+            'guard_name' => 'الحارس',
+        ]
+    ],
+    'agents' => [
+        'label' => 'وكيل',
+        'plural_label' => 'الوكلاء',
+        'fields' => [
+            'name' => 'اسم الوكيل',
+            'email' => 'البريد الإلكتروني',
+            'phone' => 'الهاتف',
+            'commission_rate' => 'معدل العمولة',
+            'status' => 'الحالة',
+        ]
+    ],
+    'customer_statuses' => [
+        'label' => 'حالة العميل',
+        'plural_label' => 'حالات العملاء',
+        'fields' => [
+            'name_en' => 'اسم الحالة (EN)',
+            'name_ar' => 'اسم الحالة (AR)',
+            'description' => 'الوصف',
+            'color' => 'رمز اللون',
+        ]
+    ],
+    'evaluation_forms' => [
+        'label' => 'استمارة التقييم',
+        'plural_label' => 'استمارات التقييم',
+        'fields' => [
+            'name_en' => 'اسم الاستمارة (EN)',
+            'name_ar' => 'اسم الاستمارة (AR)',
+            'type' => 'نوع الاستمارة',
+            'questions' => 'الأسئلة',
+            'active' => 'نشطة',
+        ]
+    ],
+    'saved_places' => [
+        'label' => 'موقع محفوظ',
+        'plural_label' => 'المواقع المحفوظة',
+        'fields' => [
+            'name' => 'اسم الموقع',
+            'latitude' => 'خط العرض',
+            'longitude' => 'خط الطول',
+            'address' => 'العنوان',
+            'place_type' => 'نوع الموقع',
+            'user' => 'المالك',
+        ]
+    ],
+    'alert_types' => [
+        'label' => 'نوع التنبيه',
+        'plural_label' => 'أنواع التنبيهات',
+        'fields' => [
+            'name_en' => 'نوع التنبيه (EN)',
+            'name_ar' => 'نوع التنبيه (AR)',
+            'description' => 'الوصف',
+            'severity' => 'مستوى الخطورة',
+            'active' => 'نشط',
+        ]
     ]
 ];

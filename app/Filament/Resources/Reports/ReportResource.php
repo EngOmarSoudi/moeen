@@ -28,6 +28,21 @@ class ReportResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'reference_no';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('resources.navigation_groups.support');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('resources.reports.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('resources.reports.plural_label');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return ReportForm::configure($schema);

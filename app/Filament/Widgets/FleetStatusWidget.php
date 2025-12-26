@@ -27,23 +27,23 @@ class FleetStatusWidget extends BaseWidget
             : 0;
 
         return [
-            Stat::make('Total Drivers', $totalDrivers)
-                ->description("{$availableDrivers} available")
+            Stat::make(__('resources.dashboard.stats.total_drivers'), $totalDrivers)
+                ->description("{$availableDrivers} " . __('available'))
                 ->descriptionIcon('heroicon-o-user-group')
                 ->color('primary'),
 
-            Stat::make('Driver Utilization', "{$driverUtilization}%")
-                ->description('Drivers currently working')
+            Stat::make(__('resources.dashboard.stats.driver_utilization'), "{$driverUtilization}%")
+                ->description(__('Drivers currently working'))
                 ->descriptionIcon('heroicon-o-chart-bar')
                 ->color($driverUtilization > 70 ? 'success' : 'warning'),
 
-            Stat::make('Total Vehicles', $totalVehicles)
-                ->description("{$activeVehicles} active")
+            Stat::make(__('resources.dashboard.stats.total_vehicles'), $totalVehicles)
+                ->description("{$activeVehicles} " . __('active'))
                 ->descriptionIcon('heroicon-o-truck')
                 ->color('info'),
 
-            Stat::make('Vehicle Utilization', "{$vehicleUtilization}%")
-                ->description('Vehicles in use')
+            Stat::make(__('resources.dashboard.stats.vehicle_utilization'), "{$vehicleUtilization}%")
+                ->description(__('Vehicles in use'))
                 ->descriptionIcon('heroicon-o-chart-pie')
                 ->color($vehicleUtilization > 70 ? 'success' : 'warning'),
         ];
