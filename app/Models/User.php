@@ -6,14 +6,16 @@ namespace App\Models;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable, HasRoles, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -52,5 +54,47 @@ class User extends Authenticatable implements FilamentUser
     public function canAccessPanel(Panel $panel): bool
     {
         return true; // For now allow all users, or restrict to specific roles later
+    }
+
+    /**
+     * Get the driver record associated with this user.
+     */
+    public function driver(): HasOne
+    {
+        return $this->hasOne(Driver::class);
+    }
+
+    /**
+     * Get the user's role type (driver, admin, or agent).
+     */
+    public function getUserType(): ?string
+    {
+        // Check if user is a driver
+        if ($this->driver()->exists()) {
+            return 'driver';
+        }
+
+        // Check if user has agent role
+        if ($this->hasRole('agent')) {
+            return 'agent';
+        }
+
+        // Check if user has admin role
+        if ($this->hasRole('admin')) {
+            return 'admin';
+        }
+
+        return null;
+    }
+
+    /**
+     * Get the agent record associated with this user (via email).
+     */
+    public function getAgentAttribute(): ?Agent
+    {
+        if ($this->hasRole('agent')) {
+            return Agent::where('email', $this->email)->first();
+        }
+        return null;
     }
 }
