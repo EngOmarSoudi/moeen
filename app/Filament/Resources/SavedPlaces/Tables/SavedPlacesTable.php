@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources\SavedPlaces\Tables;
 
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\BulkActionGroup;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -91,10 +91,10 @@ class SavedPlacesTable
                 TernaryFilter::make('is_active')
                     ->label('Active Status'),
             ])
-            ->actions([
+            ->recordActions([
                 EditAction::make(),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),

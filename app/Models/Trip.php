@@ -40,6 +40,21 @@ class Trip extends Model
         'notes',
         'cancellation_reason',
         'created_by',
+        // Customer details snapshots
+        'customer_name',
+        'customer_phone',
+        'customer_email',
+        'customer_nationality',
+        'customer_document_type',
+        'customer_document_no',
+        'customer_issuing_authority',
+        'customer_status',
+        'customer_agent_name',
+        'customer_notes',
+        'customer_special_case_note',
+        'customer_emergency_contact_name',
+        'customer_emergency_contact_phone',
+        'customer_emergency_contact_email',
     ];
 
     protected $casts = [
@@ -161,6 +176,18 @@ class Trip extends Model
     public function routeTemplate(): BelongsTo
     {
         return $this->belongsTo(RouteTemplate::class);
+    }
+
+    public function assignments(): HasMany
+    {
+        return $this->hasMany(TripAssignment::class)->orderBy('sequence_number');
+    }
+
+    public function assignedDrivers(): BelongsToMany
+    {
+        return $this->belongsToMany(Driver::class, 'trip_assignments')
+            ->withPivot('status', 'sequence_number', 'notes', 'assigned_at', 'confirmed_at', 'started_at', 'completed_at', 'declined_at')
+            ->withTimestamps();
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\DriverGeoController;
 use App\Http\Controllers\Api\TripTrackingController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,9 @@ Route::prefix('auth')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [AuthController::class, 'register']);
 });
+
+// Public driver location endpoint (for dashboard map)
+Route::get('/drivers/geo', [DriverGeoController::class, 'index'])->name('api.drivers.geo');
 
 // Protected Routes (require authentication)
 Route::middleware(['auth:sanctum'])->group(function () {

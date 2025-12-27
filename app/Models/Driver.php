@@ -102,4 +102,21 @@ class Driver extends Model
     {
         return $this->status === 'available';
     }
+
+    public function assignments(): HasMany
+    {
+        return $this->hasMany(TripAssignment::class)->orderBy('assigned_at', 'desc');
+    }
+
+    public function assignedTrips(): BelongsToMany
+    {
+        return $this->belongsToMany(Trip::class, 'trip_assignments')
+            ->withPivot('status', 'sequence_number', 'notes', 'assigned_at', 'confirmed_at', 'started_at', 'completed_at', 'declined_at')
+            ->withTimestamps();
+    }
+
+    public function activeAssignments()
+    {
+        return $this->assignments()->active();
+    }
 }

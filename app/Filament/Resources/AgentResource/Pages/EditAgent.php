@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\AgentResource\Pages;
 
 use App\Filament\Resources\AgentResource;
+use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
 class EditAgent extends EditRecord
@@ -12,7 +13,7 @@ class EditAgent extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            DeleteAction::make(),
         ];
     }
 }

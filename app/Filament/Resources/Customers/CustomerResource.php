@@ -37,12 +37,10 @@ class CustomerResource extends Resource
         return __('resources.navigation.customers');
     }
 
-    /*
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return CustomerForm::configure($form);
+        return CustomerForm::configure($schema);
     }
-    */
 
     public static function table(Table $table): Table
     {

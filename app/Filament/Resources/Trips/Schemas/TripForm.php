@@ -114,6 +114,7 @@ class TripForm
                                         if ($state) {
                                             $customer = \App\Models\Customer::with(['status', 'agent'])->find($state);
                                             if ($customer) {
+                                                // Populate display fields
                                                 $set('customer_phone', $customer->phone);
                                                 $set('customer_email', $customer->email);
                                                 $set('customer_nationality', $customer->nationality);
@@ -281,15 +282,15 @@ class TripForm
                                 TextInput::make('customer_phone')
                                     ->label(__('resources.customers.fields.phone'))
                                     ->disabled()
-                                    ->dehydrated(false),
+                                    ->dehydrated(),
                                 TextInput::make('customer_email')
                                     ->label(__('resources.customers.fields.email'))
                                     ->disabled()
-                                    ->dehydrated(false),
+                                    ->dehydrated(),
                                 TextInput::make('customer_nationality')
                                     ->label(__('resources.customers.fields.nationality'))
                                     ->disabled()
-                                    ->dehydrated(false),
+                                    ->dehydrated(),
                                 Select::make('customer_document_type')
                                     ->label(__('resources.customers.fields.document_type'))
                                     ->options([
@@ -301,48 +302,48 @@ class TripForm
                                     ])
                                     ->native(false)
                                     ->disabled()
-                                    ->dehydrated(false),
+                                    ->dehydrated(),
                                 TextInput::make('customer_document_no')
                                     ->label('Document Number')
                                     ->disabled()
-                                    ->dehydrated(false),
+                                    ->dehydrated(),
                                 TextInput::make('customer_issuing_authority')
                                     ->label('Issuing Authority')
                                     ->disabled()
-                                    ->dehydrated(false),
-                                TextInput::make('customer_status_id')
+                                    ->dehydrated(),
+                                TextInput::make('customer_status')
                                     ->label('Customer Status')
                                     ->disabled()
-                                    ->dehydrated(false),
-                                TextInput::make('customer_agent_id')
+                                    ->dehydrated(),
+                                TextInput::make('customer_agent_name')
                                     ->label('Assigned Agent')
                                     ->disabled()
-                                    ->dehydrated(false),
+                                    ->dehydrated(),
                                 Textarea::make('customer_notes')
                                     ->label('General Notes')
                                     ->rows(2)
                                     ->disabled()
-                                    ->dehydrated(false)
+                                    ->dehydrated()
                                     ->columnSpanFull(),
                                 Textarea::make('customer_special_case_note')
                                     ->label('Special Case Notes')
                                     ->rows(2)
                                     ->disabled()
-                                    ->dehydrated(false)
+                                    ->dehydrated()
                                     ->columnSpanFull(),
                                 TextInput::make('customer_emergency_contact_name')
                                     ->label('Emergency Contact Name')
                                     ->disabled()
-                                    ->dehydrated(false),
+                                    ->dehydrated(),
                                 TextInput::make('customer_emergency_contact_phone')
                                     ->label('Emergency Contact Phone')
                                     ->tel()
                                     ->disabled()
-                                    ->dehydrated(false),
+                                    ->dehydrated(),
                                 TextInput::make('customer_emergency_contact_email')
                                     ->label('Emergency Contact Email')
                                     ->disabled()
-                                    ->dehydrated(false),
+                                    ->dehydrated(),
                             ]),
                     ]),
                 // Route Information

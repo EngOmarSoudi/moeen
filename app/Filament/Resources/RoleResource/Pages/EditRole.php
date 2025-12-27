@@ -4,6 +4,7 @@ namespace App\Filament\Resources\RoleResource\Pages;
 
 use App\Filament\Resources\RoleResource;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Actions\DeleteAction;
 
 class EditRole extends EditRecord
 {
@@ -12,7 +13,7 @@ class EditRole extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            DeleteAction::make(),
         ];
     }
 }

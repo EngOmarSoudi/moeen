@@ -9,9 +9,9 @@ use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\BulkActionGroup;
 use Filament\Tables\Table;
 
 class AgentResource extends Resource
@@ -87,10 +87,10 @@ class AgentResource extends Resource
             ->filters([
                 //
             ])
-            ->actions([
+            ->recordActions([
                 EditAction::make(),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
